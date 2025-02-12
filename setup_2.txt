@@ -1,0 +1,23 @@
+mandatory †ø install 
+
+1- pip3 install pennylane --upgrade
+
+2- pip3 install scikit-learn
+
+3- pip3 install qiskit_machine_learning
+
+4- pip3 install qiskit_aer
+
+5- pip3 install qiskit-ibm-provider
+
+6- pip3 install qiskit-ibm-runtime
+
+// 1-6 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime
+
+
+
+
+
+
+
+

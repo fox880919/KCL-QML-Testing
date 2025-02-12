@@ -1,0 +1,59 @@
+mandatory †ø install 
+
+1- pip3 install qiskit
+
+2- pip3 install numpy  
+
+3- pip3 install python
+
+4- pip3 install matplotlib
+
+5- pip3 install seaborn
+
+// 1-5 => pip3 install numpy matplotlib seaborn
+
+======
+
+
+steps 
+
+1- python3 -m venv my_qiskit_env
+2- source my_qiskit_env/bin/activate
+3- pip3 install qiskit
+
+4- pip3 install qiskit-terra ==> causes an error
+
+
+=======
+
+For jupyter
+
+1- pip3 install ipykernel
+or
+python3 -m pip install ipykernel
+
+
+=======
+
+inspection
+
+
+1- pip3 list | grep qiskit
+
+2- pip3 uninstall qiskit-terra
+
+3- pip3 uninstall qiskit
+
+4- pip3 install qiskit
+
+// no module named pip
+ 1- python3 -m ensurepip
+
+ 2- use 
+ python3 -m pip
+
+
+
+
+
+

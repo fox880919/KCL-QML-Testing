@@ -120,10 +120,11 @@ def getData():
 
     # print('original x_tr: ', x_tr[0])
 
-    if MyParameters.applyAngleRotation:
+    # if MyParameters.applyAngleRotation:
 
-        x_tr, x_test = checkImplementingPCA(x_tr, x_test)
+        # x_tr, x_test = checkImplementingPCA(x_tr, x_test)
 
+    x_tr, x_test = checkImplementingPCA(x_tr, x_test)
 
     # print('after PCA x_tr: ', x_tr[0])
 
@@ -187,6 +188,7 @@ def getData():
         # print('before x_tr[0]: ', x_tr[0])
         x_tr, x_test = myMetamorphicTesting.addingAdditionalFeature(x_tr, x_test)
 
+        print('MyParameters.pca_components: ', MyParameters.pca_components)
         # print('after addAdditionalFeature x_tr.shape: ', x_tr.shape)
         # print('after addAdditionalFeature x_test.shape: ', x_test.shape)
         # print('after x_tr[0]: ', x_tr[0])
@@ -204,9 +206,9 @@ def getData():
 
     # print('x_tr: ', x_tr)
 
-    if not MyParameters.applyAngleRotation:
+    # if not MyParameters.applyAngleRotation:
 
-        x_tr, x_test = checkImplementingPCA(x_tr, x_test)
+    #     x_tr, x_test = checkImplementingPCA(x_tr, x_test)
 
 
     return np, x_tr, x_test, y_tr, y_test
@@ -334,12 +336,12 @@ def tryManyParameters():
     # runMain()
     # MyParameters.addAdditionalFeature = False
 
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 8
-    # MyParameters.addAdditionalFeature = True
-    # runMain()
-    # MyParameters.pca_components = 13
-    # MyParameters.addAdditionalFeature = False
+    MyParameters.featureMapType = 1
+    MyParameters.pca_components = 6
+    MyParameters.addAdditionalFeature = True
+    runMain()
+    MyParameters.pca_components = 13
+    MyParameters.addAdditionalFeature = False
 
     # MyParameters.featureMapType = 2
     # MyParameters.addAdditionalFeature = True
@@ -365,13 +367,13 @@ def tryManyParameters():
     # MyParameters.addAdditionalFeature = False
 
     #9 PCA with components = 13
-    MyParameters.featureMapType = 1
-    MyParameters.pca_components = 13
-    print('MyParameters.pca_components: ', MyParameters.pca_components)
-    MyParameters.applyAngleRotation = True
-    runMain()
-    MyParameters.pca_components = 13
-    MyParameters.applyAngleRotation = False
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 13
+    # print('MyParameters.pca_components: ', MyParameters.pca_components)
+    # MyParameters.applyAngleRotation = True
+    # runMain()
+    # MyParameters.pca_components = 13
+    # MyParameters.applyAngleRotation = False
 
 
 

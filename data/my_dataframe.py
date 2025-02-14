@@ -10,9 +10,12 @@ class MyDataFrame:
 
         # myParameters = MyParameters()
 
-        formattedData = {'Feature_Map': [MyParameters.featureMaps[usedParameters['featureMapType']]], 
-                'Data_Type':[MyParameters.allDataTypes[usedParameters['dataType']]], 
-                'PCA_Components': [usedParameters['components']],
+        formattedData = {
+                # 'Feature_Map': [MyParameters.featureMaps[usedParameters['featureMapType']]], 
+                # 'Data_Type':[MyParameters.allDataTypes[usedParameters['dataType']]], 
+                'Feature_Map': [MyParameters.featureMaps[MyParameters.featureMapType]], 
+                'Data_Type':[MyParameters.allDataTypes[MyParameters.dataType]],                 
+                'PCA_Components': [MyParameters.pca_components],
                 'Accuracy_Score': [accuracyScore],
                 'Used_Metamorphic': [usedMetamorphic],
                 'Apply_Scalar_value': [MyParameters.applyScalarValue],

@@ -6,6 +6,8 @@ from my_metamorphic_relations import MyMetamorphicRelations
 
 import numpy as np
 
+from classes.parameters import MyParameters
+
 
 # from data_manager import DataManager
 
@@ -117,6 +119,8 @@ class MyMetamorphicTesting:
         mr = MyMetamorphicTesting.myMetamorphicRelations
 
         new_x_tr, new_x_test =  mr.addingAdditionalFeature(x_tr, x_test)
+
+        MyParameters.pca_components = + MyParameters.pca_components + 1
         return new_x_tr, new_x_test
 
     #7

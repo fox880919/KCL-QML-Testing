@@ -12,7 +12,13 @@ mandatory †ø install
 
 6- pip3 install qiskit-ibm-runtime
 
-// 1-6 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime
+7- pip3 install hypothesis
+
+8- pip3 install pytest
+
+//usage: pytest hypothesis_test.py
+
+// 1-8 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime hypothesis pytest
 
 
 

@@ -1,0 +1,4 @@
+,Feature_Map,Data_Type,PCA_Components,Accuracy_Score,Used_Metamorphic,Apply_Scalar_value,Scalar_Value,Apply_Rotation_Angle,Angle_Rotation,Apply_Permutation,Invert_Labels,Apply_Perturb_Noise,Perturb_Noise,Modify_Circuit_Depth,adding_Additional_Feature,Adding_Additional_Data_Point,Date_And_Time
+0,Amplitude Embedding,Wine Data,0,1.0,False,False,1,False,0,False,False,False,0,False,False,False,2025-02-14 03:36:03
+1,Angle Embedding,Wine Data,8,0.9444444444444444,False,False,1,False,0,False,False,False,0,False,False,False,2025-02-14 03:36:19
+2,Custom Embedding,Wine Data,0,0.8333333333333334,False,False,1,False,0,False,False,False,0,False,False,False,2025-02-14 03:37:20

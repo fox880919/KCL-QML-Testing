@@ -1,11 +1,29 @@
 from sklearn.decomposition import PCA
+from wine_data import WineData
 
 class DataManager:
+      
+      def getDatabyNumber(self, type = 0):
+          
+        options = {
+          0 : WineData,
+          # 4 : sqr,
+          # 9 : sqr,
+          # 2 : even,
+          # 3 : prime,
+          # 5 : prime,
+          # 7 : prime,
+        }
 
-      def implementPCA(self, x_tr, x_test, pca_n_components):
+        if not type < len(options):
+           
+           print('type is not available and will call type 0')
+           type = 0
 
-        pca = PCA(n_components = pca_n_components)
-        xs_tr = pca.fit_transform(x_tr)
-        xs_test = pca.transform(x_test)
+        myData = options[type]()
 
-        return xs_tr, xs_test
+        np, x_tr, x_test, y_tr, y_test = myData.prepareData()
+
+        
+        return np, x_tr, x_test, y_tr, y_test
+                    

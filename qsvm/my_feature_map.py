@@ -10,6 +10,8 @@ from sklearn.metrics import accuracy_score
 
 from itertools import combinations
 
+from classes.parameters import MyParameters
+
 class MyFeatureMap:
 
     nqubits = 4
@@ -25,6 +27,8 @@ class MyFeatureMap:
     circuitDepth = 2
     nqubits = 4
     modifiedCircuit = {}
+
+    # myParameters = MyParameters()
 
 
     def pickFeatureMapType(self, np, type = 0, components = 8):
@@ -72,7 +76,7 @@ class MyFeatureMap:
         MyFeatureMap.xs_tr = pca.fit_transform(MyFeatureMap.x_tr)
         MyFeatureMap.xs_test = pca.transform(MyFeatureMap.x_test)
 
-    @qml.qnode(qml.device("lightning.qubit", wires = 8))
+    @qml.qnode(qml.device("lightning.qubit", wires = MyParameters.pca_components))
     def __getAngleEmdedding(a, b):
 
         qml.AngleEmbedding(a, wires=range(MyFeatureMap.nqubits)) 

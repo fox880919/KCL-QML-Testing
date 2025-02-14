@@ -8,24 +8,24 @@ class MyDataFrame:
 
     def formatData(self, accuracyScore, usedMetamorphic, usedParameters, dateAndTime):
 
-        myParameters = MyParameters()
+        # myParameters = MyParameters()
 
-        formattedData = {'Feature_Map': [myParameters.featureMaps[usedParameters['featureMapType']]], 
-                'Data_Type':[myParameters.allDataTypes[usedParameters['dataType']]], 
+        formattedData = {'Feature_Map': [MyParameters.featureMaps[usedParameters['featureMapType']]], 
+                'Data_Type':[MyParameters.allDataTypes[usedParameters['dataType']]], 
                 'PCA_Components': [usedParameters['components']],
                 'Accuracy_Score': [accuracyScore],
                 'Used_Metamorphic': [usedMetamorphic],
-                'Apply_Scalar_value': [myParameters.applyScalarValue],
-                'Scalar_Value': [myParameters.scaleValue if myParameters.applyScalarValue else 1],
-                'Apply_Rotation_Angle': [myParameters.applyAngleRotation],
-                'Angle_Rotation': [myParameters.angle if myParameters.applyAngleRotation else 0],
-                'Apply_Permutation': [myParameters.applyPermutation],
-                'Invert_Labels': [myParameters.invertAllLabels],
-                'Apply_Perturb_Noise': [myParameters.applyPerturbNoise],
-                'Perturb_Noise': [myParameters.perturbNoise if myParameters.applyPerturbNoise else 0],
-                'Modify_Circuit_Depth': [myParameters.modifyCircuitDepth],
-                'adding_Additional_Feature': [myParameters.addAdditionalFeature],
-                'Adding_Additional_Data_Point': [myParameters.addAdditionalInputsAndOutputs],
+                'Apply_Scalar_value': [MyParameters.applyScalarValue],
+                'Scalar_Value': [MyParameters.scaleValue if MyParameters.applyScalarValue else 1],
+                'Apply_Rotation_Angle': [MyParameters.applyAngleRotation],
+                'Angle_Rotation': [MyParameters.angle if MyParameters.applyAngleRotation else 0],
+                'Apply_Permutation': [MyParameters.applyPermutation],
+                'Invert_Labels': [MyParameters.invertAllLabels],
+                'Apply_Perturb_Noise': [MyParameters.applyPerturbNoise],
+                'Perturb_Noise': [MyParameters.perturbNoise if MyParameters.applyPerturbNoise else 0],
+                'Modify_Circuit_Depth': [MyParameters.modifyCircuitDepth],
+                'adding_Additional_Feature': [MyParameters.addAdditionalFeature],
+                'Adding_Additional_Data_Point': [MyParameters.addAdditionalInputsAndOutputs],
 
                 'Date_And_Time': [dateAndTime],
                 }

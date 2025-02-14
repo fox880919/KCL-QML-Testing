@@ -25,7 +25,7 @@ from qsvm.my_pca import MyPCA
 
 dataManager = DataManager()
 
-myParameters = MyParameters()
+# myParameters = MyParameters()
 
 readUserInput = ReadUserInput()
 
@@ -43,13 +43,13 @@ def DoUserWantToUseDefaultParameters():
 
 def DoUserWantToUseMRs():
 
-    if myParameters.AskUserToApplyMRs:
+    if MyParameters.AskUserToApplyMRs:
 
         message = "Should we apply MRs? (0 for Yes, and 1 for No)"
 
         applyMRs = readUserInput.readGenericBoleanInput(message)
 
-        myParameters.applyMRs = applyMRs
+        MyParameters.applyMRs = applyMRs
 
         return applyMRs
     else:
@@ -63,7 +63,7 @@ def checkImplementingPCA(x_tr, x_test):
 
     else: 
 
-        featureMapType = myParameters.featureMapType   
+        featureMapType = MyParameters.featureMapType   
 
         print('default featureMapType is: ', featureMapType)
 
@@ -75,7 +75,7 @@ def checkImplementingPCA(x_tr, x_test):
 
     if featureMapType == 1:
 
-        defaultNumber = myParameters.pca_components
+        defaultNumber = MyParameters.pca_components
 
         message = "Enter components number for PCA (default: {defaultNumber}):"
         
@@ -84,7 +84,7 @@ def checkImplementingPCA(x_tr, x_test):
             components = readUserInput.readGeneralNumericInput(message, defaultNumber)
         else:
 
-            components = myParameters.pca_components   
+            components = MyParameters.pca_components   
 
             print('default components number is: ', components)
 
@@ -94,7 +94,7 @@ def checkImplementingPCA(x_tr, x_test):
 
         MyParameters.pca_components = components
 
-        if(myParameters.featureMapType == 1):
+        if(MyParameters.featureMapType == 1):
 
             print('applied PCA with components number:', components)
 
@@ -110,7 +110,7 @@ def getData():
         dataType = readUserInput.readDataTypeInput()
     else:
 
-        dataType = myParameters.dataType
+        dataType = MyParameters.dataType
 
         print('default dataType is: ', dataType)
 
@@ -120,66 +120,69 @@ def getData():
 
     # print('original x_tr: ', x_tr[0])
 
-    x_tr, x_test = checkImplementingPCA(x_tr, x_test)
+    if MyParameters.applyAngleRotation:
+
+        x_tr, x_test = checkImplementingPCA(x_tr, x_test)
+
 
     # print('after PCA x_tr: ', x_tr[0])
 
     
     #1
-    if myParameters.applyScalarValue:
-        x_tr, x_test = myMetamorphicTesting.scaleInputData(x_tr, x_test, myParameters.scaleValue)
-        print('scaled x_tr and x_test by:', myParameters.scaleValue)
+    if MyParameters.applyScalarValue:
+        x_tr, x_test = myMetamorphicTesting.scaleInputData(x_tr, x_test, MyParameters.scaleValue)
+        print('scaled x_tr and x_test by:', MyParameters.scaleValue)
 
     
     #2
-    if myParameters.applyAngleRotation:
+    if MyParameters.applyAngleRotation:
 
         # print('before rotation')
         # print(x_test)
 
 
-        x_tr = myMetamorphicTesting.rotateInputDataWithAngle(x_tr, myParameters.angle)
-        x_test = myMetamorphicTesting.rotateInputDataWithAngle(x_test, myParameters.angle)
+        x_tr = myMetamorphicTesting.rotateInputDataWithAngle(x_tr, MyParameters.angle)
+        x_test = myMetamorphicTesting.rotateInputDataWithAngle(x_test, MyParameters.angle)
 
         # print('after rotation x_tr: ', x_tr[0])
 
-        print('rotated x_tr and x_test with angle ', myParameters.angle)
+        print('rotated x_tr and x_test with angle ', MyParameters.angle)
 
         # print('after rotation')
         # print(x_test)
 
 
     #3
-    if myParameters.applyPermutation:
+    if MyParameters.applyPermutation:
         x_tr, y_tr= myMetamorphicTesting.permutateInputData(x_tr, y_tr)
 
         print('permutated both of x_tr and y_tr')
 
 
     #4
-    if myParameters.invertAllLabels:
-        y_tr, y_test= myMetamorphicTesting.invertAllLabels(y_tr, y_test, myParameters.numberOfLabelsClasses)
+    if MyParameters.invertAllLabels:
+        y_tr, y_test= myMetamorphicTesting.invertAllLabels(y_tr, y_test, MyParameters.numberOfLabelsClasses)
 
         print('inverted labels of both of y_tr and y_test')
 
 
     #5
-    if myParameters.applyPerturbNoise:
-        x_test = myMetamorphicTesting.perturbParameters(x_test, myParameters.perturbNoise)
+    if MyParameters.applyPerturbNoise:
+        x_test = myMetamorphicTesting.perturbParameters(x_test, MyParameters.perturbNoise)
 
         print('applyed noise by {delta} to x_test')
 
     
 
     #6
-    if myParameters.modifyCircuitDepth:
-        myMetamorphicTesting.modifyCircuitDepth(myParameters.featureMapType)
+    if MyParameters.modifyCircuitDepth:
+        myMetamorphicTesting.modifyCircuitDepth(MyParameters.featureMapType)
 
 
-    # print('myParameters.addAdditionalFeature: ', myParameters.addAdditionalFeature)
+    # print('MyParameters.addAdditionalFeature: ', MyParameters.addAdditionalFeature)
 
     #7
-    if myParameters.addAdditionalFeature:
+    if MyParameters.addAdditionalFeature:
         
         # print('before x_tr[0]: ', x_tr[0])
         x_tr, x_test = myMetamorphicTesting.addingAdditionalFeature(x_tr, x_test)
@@ -189,7 +192,7 @@ def getData():
         # print('after x_tr[0]: ', x_tr[0])
 
     #8
-    if myParameters.addAdditionalInputsAndOutputs:
+    if MyParameters.addAdditionalInputsAndOutputs:
     
         x_tr, x_test, y_tr, y_test  = myMetamorphicTesting.addingRedundantInputsAndOutputs(x_tr, x_test, y_tr, y_test)
 
@@ -201,6 +204,11 @@ def getData():
 
     # print('x_tr: ', x_tr)
 
+    if not MyParameters.applyAngleRotation:
+
+        x_tr, x_test = checkImplementingPCA(x_tr, x_test)
+
+
     return np, x_tr, x_test, y_tr, y_test
 
 
@@ -208,7 +216,7 @@ def useQSVM(np, x_tr, x_test, y_tr, y_test):
 
     myKernel = MyKernel()
 
-    myAccuracyScore = myKernel.startSVC(np, x_tr, x_test, y_tr, y_test, myParameters.featureMapType, myParameters.pca_components)
+    myAccuracyScore = myKernel.startSVC(np, x_tr, x_test, y_tr, y_test, MyParameters.featureMapType, MyParameters.pca_components)
 
     return myAccuracyScore
 
@@ -236,7 +244,7 @@ def saveToDataFrame(myAccuracyScore, usedMetaMorphic):
 
 def runMain():
 
-    # myParameters = newParameters
+    # MyParameters = newParameters
  
     np, x_tr, x_test, y_tr, y_test = getData()
 
@@ -252,118 +260,131 @@ def runMain():
 
 def tryManyParameters():
 
-    myParameters.featureMapType = 0
-    runMain()
+    print('trying many parameters')
+    # #0
+    # MyParameters.featureMapType = 0
+    # runMain()
 
-    myParameters.featureMapType = 1
-    myParameters.pca_components = 8
-    runMain()
-    myParameters.pca_components = 13
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 8
+    # runMain()
+    # MyParameters.pca_components = 13
     
-    myParameters.featureMapType = 2
-    runMain()
+    # MyParameters.featureMapType = 2
+    # runMain()
     
-    #1
-    myParameters.featureMapType = 0
-    myParameters.applyScalarValue = True
+    # #1
+    # MyParameters.featureMapType = 0
+    # MyParameters.applyScalarValue = True
+    # runMain()
+    # MyParameters.applyScalarValue = False
+
+    # #2
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 8
+    # MyParameters.applyAngleRotation = True
+    # runMain()
+    # MyParameters.pca_components = 13
+    # MyParameters.applyAngleRotation = False
+
+    # MyParameters.featureMapType = 2
+    # MyParameters.applyAngleRotation = True
+    # runMain()
+    # MyParameters.applyAngleRotation = False
+
+    # #3
+    # MyParameters.featureMapType = 0
+    # MyParameters.applyPermutation = True
+    # runMain()
+    # MyParameters.applyPermutation = False
+
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 8
+    # MyParameters.applyPermutation = True
+    # runMain()
+    # MyParameters.pca_components = 13
+    # MyParameters.applyPermutation = False
+
+    # MyParameters.featureMapType = 2
+    # MyParameters.applyPermutation = True
+    # runMain()
+    # MyParameters.applyPermutation = False
+
+    # #4
+    # MyParameters.featureMapType = 0
+    # MyParameters.invertAllLabels = True
+    # runMain()
+    # MyParameters.invertAllLabels = False
+
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 8
+    # MyParameters.invertAllLabels = True
+    # runMain()
+    # MyParameters.pca_components = 13
+    # MyParameters.invertAllLabels = False
+
+    # MyParameters.featureMapType = 2
+    # MyParameters.invertAllLabels = True
+    # runMain()
+    # MyParameters.invertAllLabels = False
+
+    # #7
+    # MyParameters.featureMapType = 0
+    # MyParameters.addAdditionalFeature = True
+    # runMain()
+    # MyParameters.addAdditionalFeature = False
+
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 8
+    # MyParameters.addAdditionalFeature = True
+    # runMain()
+    # MyParameters.pca_components = 13
+    # MyParameters.addAdditionalFeature = False
+
+    # MyParameters.featureMapType = 2
+    # MyParameters.addAdditionalFeature = True
+    # runMain()
+    # MyParameters.addAdditionalFeature = False
+
+    # #8
+    # MyParameters.featureMapType = 0
+    # MyParameters.addAdditionalInputsAndOutputs = True
+    # runMain()
+    # MyParameters.addAdditionalFeature = False
+
+    # MyParameters.featureMapType = 1
+    # MyParameters.pca_components = 8
+    # MyParameters.addAdditionalInputsAndOutputs = True
+    # runMain()
+    # MyParameters.pca_components = 13
+    # MyParameters.addAdditionalFeature = False
+
+    # MyParameters.featureMapType = 2
+    # MyParameters.addAdditionalInputsAndOutputs = True
+    # runMain()
+    # MyParameters.addAdditionalFeature = False
+
+    #9 PCA with components = 13
+    MyParameters.featureMapType = 1
+    MyParameters.pca_components = 13
+    print('MyParameters.pca_components: ', MyParameters.pca_components)
+    MyParameters.applyAngleRotation = True
     runMain()
-    myParameters.applyScalarValue = False
-
-    #2
-    myParameters.featureMapType = 1
-    myParameters.pca_components = 8
-    myParameters.applyAngleRotation = True
-    runMain()
-    myParameters.pca_components = 13
-    myParameters.applyAngleRotation = False
-
-    myParameters.featureMapType = 2
-    myParameters.applyAngleRotation = True
-    runMain()
-    myParameters.applyAngleRotation = False
-
-    #3
-    myParameters.featureMapType = 0
-    myParameters.applyPermutation = True
-    runMain()
-    myParameters.applyPermutation = False
-
-    myParameters.featureMapType = 1
-    myParameters.pca_components = 8
-    myParameters.applyPermutation = True
-    runMain()
-    myParameters.pca_components = 13
-    myParameters.applyPermutation = False
-
-    myParameters.featureMapType = 2
-    myParameters.applyPermutation = True
-    runMain()
-    myParameters.applyPermutation = False
-
-    #4
-    myParameters.featureMapType = 0
-    myParameters.invertAllLabels = True
-    runMain()
-    myParameters.invertAllLabels = False
-
-    myParameters.featureMapType = 1
-    myParameters.pca_components = 8
-    myParameters.invertAllLabels = True
-    runMain()
-    myParameters.pca_components = 13
-    myParameters.invertAllLabels = False
-
-    myParameters.featureMapType = 2
-    myParameters.invertAllLabels = True
-    runMain()
-    myParameters.invertAllLabels = False
-
-    #7
-    myParameters.featureMapType = 0
-    myParameters.addAdditionalFeature = True
-    runMain()
-    myParameters.addAdditionalFeature = False
-
-    myParameters.featureMapType = 1
-    myParameters.pca_components = 8
-    myParameters.addAdditionalFeature = True
-    runMain()
-    myParameters.pca_components = 13
-    myParameters.addAdditionalFeature = False
-
-    myParameters.featureMapType = 2
-    myParameters.addAdditionalFeature = True
-    runMain()
-    myParameters.addAdditionalFeature = False
-
-    #8
-    myParameters.featureMapType = 0
-    myParameters.addAdditionalInputsAndOutputs = True
-    runMain()
-    myParameters.addAdditionalFeature = False
-
-    myParameters.featureMapType = 1
-    myParameters.pca_components = 8
-    myParameters.addAdditionalInputsAndOutputs = True
-    runMain()
-    myParameters.pca_components = 13
-    myParameters.addAdditionalFeature = False
-
-    myParameters.featureMapType = 2
-    myParameters.addAdditionalInputsAndOutputs = True
-    runMain()
-    myParameters.addAdditionalFeature = False
+    MyParameters.pca_components = 13
+    MyParameters.applyAngleRotation = False
 
 
 
-if myParameters.askUserToInputParameters:
+
+
+if MyParameters.askUserToInputParameters:
 
     useDefaultParameters = DoUserWantToUseDefaultParameters()
 else:
     useDefaultParameters = True
 
 
-if myParameters.AskUserToApplyMRs:
+if MyParameters.AskUserToApplyMRs:
 
     useMetamorphicRelations = DoUserWantToUseMRs()
 

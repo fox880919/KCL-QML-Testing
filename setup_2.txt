@@ -16,9 +16,15 @@ mandatory †ø install
 
 8- pip3 install pytest
 
+9- pip3 install joblib 
+//or
+10- pip3 install pickle
+//or
+11- pip3 install dill
+
 //usage: pytest hypothesis_test.py
 
-// 1-8 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime hypothesis pytest
+// 1-8 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime hypothesis pytest joblib pickle
 
 
 

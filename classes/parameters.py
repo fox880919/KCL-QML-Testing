@@ -39,7 +39,10 @@ class MyParameters:
 
     addAdditionalInputsAndOutputs = False
 
+    usedTrainedModel= True
 
+    modelName = 'svm00'
+    
     allDataTypes=['Wine Data']
 
     featureMaps=['Amplitude Embedding', 'Angle Embedding', 'Custom Embedding']

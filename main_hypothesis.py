@@ -16,8 +16,6 @@ from data.data_manager import DataManager
 
 from qsvm.my_kernel import MyKernel
 
-from qsvm.my_qsvm import MyQSVM
-
 from data.my_dataframe import MyDataFrame
 
 from metamorphic.my_metamorphic_testing import MyMetamorphicTesting
@@ -215,15 +213,12 @@ def getData():
 
     return np, x_tr, x_test, y_tr, y_test
 
+
 def useQSVM(np, x_tr, x_test, y_tr, y_test):
 
-    # myKernel = MyKernel()
+    myKernel = MyKernel()
 
-    # myAccuracyScore = myKernel.startSVC(np, x_tr, x_test, y_tr, y_test, MyParameters.featureMapType, MyParameters.pca_components)
-
-    myQSVM = MyQSVM()
-
-    myAccuracyScore = myQSVM.startSVC(np, x_tr, x_test, y_tr, y_test, MyParameters.featureMapType, MyParameters.pca_components)
+    myAccuracyScore = myKernel.startSVC(np, x_tr, x_test, y_tr, y_test, MyParameters.featureMapType, MyParameters.pca_components)
 
     return myAccuracyScore
 
@@ -257,132 +252,41 @@ def runMain():
 
     print('data is prepared')
 
-
     myAccuracyScore = useQSVM(np, x_tr, x_test, y_tr, y_test)
 
-    # print('myAccuracyScore: ', myAccuracyScore)
-    # saveToDataFrame(myAccuracyScore, usedMetaMorphic = False)
+    print('myAccuracyScore: ', myAccuracyScore)
+    saveToDataFrame(myAccuracyScore, usedMetaMorphic = False)
 
     print('process is finished')
+
+    return myAccuracyScore
 # nqubits, input_tr, input_test, output_tr, output_test = useQSVMWithMetamorphic()
 
-def tryManyParameters():
 
-    print('trying many parameters')
-    # #0
-    # MyParameters.featureMapType = 0
-    # runMain()
+from hypothesis import example, given, strategies as st
 
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 8
-    # runMain()
-    # MyParameters.pca_components = 13
-    
-    # MyParameters.featureMapType = 2
-    # runMain()
-    
-    # #1
-    # MyParameters.featureMapType = 0
-    # MyParameters.applyScalarValue = True
-    # runMain()
-    # MyParameters.applyScalarValue = False
+from hypothesis.strategies import text
 
-    # #2
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 8
-    # MyParameters.applyAngleRotation = True
-    # runMain()
-    # MyParameters.pca_components = 13
-    # MyParameters.applyAngleRotation = False
+from hypothesis.strategies import integers
 
-    # MyParameters.featureMapType = 2
-    # MyParameters.applyAngleRotation = True
-    # runMain()
-    # MyParameters.applyAngleRotation = False
+def tryManyParameters(scalarValue):
 
-    # #3
-    # MyParameters.featureMapType = 0
-    # MyParameters.applyPermutation = True
-    # runMain()
-    # MyParameters.applyPermutation = False
 
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 8
-    # MyParameters.applyPermutation = True
-    # runMain()
-    # MyParameters.pca_components = 13
-    # MyParameters.applyPermutation = False
-
-    # MyParameters.featureMapType = 2
-    # MyParameters.applyPermutation = True
-    # runMain()
-    # MyParameters.applyPermutation = False
-
-    # #4
-    # MyParameters.featureMapType = 0
-    # MyParameters.invertAllLabels = True
-    # runMain()
-    # MyParameters.invertAllLabels = False
-
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 8
-    # MyParameters.invertAllLabels = True
-    # runMain()
-    # MyParameters.pca_components = 13
-    # MyParameters.invertAllLabels = False
-
-    # MyParameters.featureMapType = 2
-    # MyParameters.invertAllLabels = True
-    # runMain()
-    # MyParameters.invertAllLabels = False
-
-    # #7
-    # MyParameters.featureMapType = 0
-    # MyParameters.addAdditionalFeature = True
-    # runMain()
-    # MyParameters.addAdditionalFeature = False
-
-    MyParameters.featureMapType = 1
-    MyParameters.pca_components = 6
-    MyParameters.addAdditionalFeature = True
+    #1
+    MyParameters.featureMapType = 0
+    MyParameters.applyScalarValue = True
+    MyParameters.scaleValue = scalarValue
     runMain()
-    MyParameters.pca_components = 13
-    MyParameters.addAdditionalFeature = False
-
-    # MyParameters.featureMapType = 2
-    # MyParameters.addAdditionalFeature = True
-    # runMain()
-    # MyParameters.addAdditionalFeature = False
-
-    # #8
-    # MyParameters.featureMapType = 0
-    # MyParameters.addAdditionalInputsAndOutputs = True
-    # runMain()
-    # MyParameters.addAdditionalFeature = False
-
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 8
-    # MyParameters.addAdditionalInputsAndOutputs = True
-    # runMain()
-    # MyParameters.pca_components = 13
-    # MyParameters.addAdditionalFeature = False
-
-    # MyParameters.featureMapType = 2
-    # MyParameters.addAdditionalInputsAndOutputs = True
-    # runMain()
-    # MyParameters.addAdditionalFeature = False
-
-    #9 PCA with components = 13
-    # MyParameters.featureMapType = 1
-    # MyParameters.pca_components = 13
-    # print('MyParameters.pca_components: ', MyParameters.pca_components)
-    # MyParameters.applyAngleRotation = True
-    # runMain()
-    # MyParameters.pca_components = 13
-    # MyParameters.applyAngleRotation = False
+    MyParameters.applyScalarValue = False
 
 
 
+@given(integers(min_value=2, max_value=10))
+def test_try_many_parameters(x):
+
+    myAccuracyScore = tryManyParameters(x)
+
+    assert myAccuracyScore == 1.0
 
 
 if MyParameters.askUserToInputParameters:
@@ -396,8 +300,7 @@ if MyParameters.AskUserToApplyMRs:
 
     useMetamorphicRelations = DoUserWantToUseMRs()
 
-# tryManyParameters()
-
-runMain()
 
 
+
+test_try_many_parameters()

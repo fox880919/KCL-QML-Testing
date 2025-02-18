@@ -16,11 +16,22 @@ class MyMetamorphicRelations:
         # ...:
 
     
-    #2
+    #2-1
     def metamorphic_feature_rotation_with_angle(self, x, angle):
         # Generate a random rotation matrix
         rotation_matrix = expm(np.eye(x.shape[1]) * 1j * angle) 
         return np.dot(rotation_matrix, x.T).T
+    
+    #2-2 => to try later
+    def metamorphic_feature_geometric_rotation_with_angle(x, angle):
+        
+        rotation_matrix = np.array([
+            [np.cos(angle), -np.sin(angle)],
+            [np.sin(angle), np.cos(angle)]
+        ])
+        
+        # Apply the rotation to the data
+        return np.dot(x, rotation_matrix.T)
 
     #3
     def metamorphic_feature_permutation(self, input, output):
@@ -65,7 +76,7 @@ class MyMetamorphicRelations:
 
         return x + np.random.uniform(-delta, delta, size=x.shape)
     
-    #6
+    #--
     def modify_circuit_depth(self, type):
 
         # print('type')
@@ -78,7 +89,7 @@ class MyMetamorphicRelations:
             return MyMetamorphicRelations.__getAmplitudeEmdedding
         
     
-    #7
+    #6
     def addingAdditionalFeature(self, x_tr, x_test):
 
         # print('x_tr.shape: ', x_tr.shape)
@@ -114,7 +125,7 @@ class MyMetamorphicRelations:
 
         return new_x_tr, new_x_test
     
-    #77
+    #66
     def addingAdditionalFeaturePerInput(input):
 
         featuresNumber = len(input)
@@ -129,7 +140,7 @@ class MyMetamorphicRelations:
 
         return featuresAverage
     
-    #8 
+    #7
     def addingRedundantInputsAndOutputs(self, x_tr, x_test, y_tr, y_test):
         
         # print('y_tr.shape: ', y_tr.shape)

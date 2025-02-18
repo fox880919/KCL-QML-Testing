@@ -104,7 +104,7 @@ class MyMetamorphicTesting:
         
         return xPerturbed
     
-     #6
+     #--
     def modifyCircuitDepth(self, type):
   
         mr = MyMetamorphicTesting.myMetamorphicRelations
@@ -113,7 +113,7 @@ class MyMetamorphicTesting:
 
         return newCircuit
     
-    #7
+    #6
     def addingAdditionalFeature(self, x_tr, x_test):
         
         mr = MyMetamorphicTesting.myMetamorphicRelations

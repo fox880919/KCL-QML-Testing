@@ -68,6 +68,8 @@ class MyMetamorphicTesting:
 
         rotatedX = mr.metamorphic_feature_rotation_with_angle(x, angle)
 
+        # rotatedX = mr.metamorphic_feature_geometric_rotation_with_angle(x, angle)
+
         # print('after rotation rotatedX')
         # print(rotatedX)
 

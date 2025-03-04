@@ -23,7 +23,7 @@ class MyMetamorphicRelations:
         return np.dot(rotation_matrix, x.T).T
     
     #2-2 => to try later
-    def metamorphic_feature_geometric_rotation_with_angle(x, angle):
+    def metamorphic_feature_geometric_rotation_with_angle(self, x, angle):
         
         rotation_matrix = np.array([
             [np.cos(angle), -np.sin(angle)],
@@ -31,7 +31,7 @@ class MyMetamorphicRelations:
         ])
         
         # Apply the rotation to the data
-        return np.dot(x, rotation_matrix.T)
+        return np.dot(rotation_matrix, x.T).T
 
     #3
     def metamorphic_feature_permutation(self, input, output):

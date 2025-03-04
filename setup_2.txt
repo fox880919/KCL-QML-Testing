@@ -12,9 +12,9 @@ mandatory †ø install
 
 6- pip3 install qiskit-ibm-runtime
 
-7- pip3 install hypothesis
+7- pip install hypothesis (not pip3 install hypothesis)
 
-8- pip3 install pytest
+8- pip install pytest (not pip3 install pytest)
 
 9- pip3 install joblib 
 //or
@@ -22,7 +22,9 @@ mandatory †ø install
 //or
 11- pip3 install dill
 
-//usage: pytest hypothesis_test.py
+//usage: pytest hypothesis_test.py or python3 hypothesis_test.py (but call the function in the code) or use
+// if __name__ == "__main__":
+//    test_decode_inverts_encode()
 
 // 1-8 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime hypothesis pytest joblib pickle
 

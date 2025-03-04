@@ -17,14 +17,18 @@ class MyDill:
         
         fullFileName = f'{fileName}.pkl'
 
+        # print('fullFileName: ', fullFileName)
+
         if os.path.exists(fullFileName):
-            print("File exists.")
+            # print("File exists.")
 
             file_size = os.path.getsize(fullFileName)
             if file_size == 0:
-                print(f"The file '{fullFileName}' is empty.")
+                doNothing=True
+                # print(f"The file '{fullFileName}' is empty.")
             else:
-                print(f"The file '{fullFileName}' is not empty. Size: {file_size} bytes.")
+                doNothing=True
+                # print(f"The file '{fullFileName}' is not empty. Size: {file_size} bytes.")
 
         else:
             print("File does not exist.")

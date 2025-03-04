@@ -6,7 +6,7 @@ from classes.parameters import MyParameters
 
 class MyDataFrame:
 
-    def formatData(self, accuracyScore, usedMetamorphic, usedParameters, dateAndTime):
+    def formatData(self, accuracyScore, usedMetamorphic, usedParameters, dateAndTime, foldIndex):
 
         # myParameters = MyParameters()
 
@@ -17,6 +17,8 @@ class MyDataFrame:
                 'Data_Type':[MyParameters.allDataTypes[MyParameters.dataType]],                 
                 'PCA_Components': [MyParameters.pca_components],
                 'Accuracy_Score': [accuracyScore],
+                'n_fold': MyParameters.n_folds,
+                'fold_index': foldIndex,
                 'Used_Metamorphic': [usedMetamorphic],
                 'Apply_Scalar_value': [MyParameters.applyScalarValue],
                 'Scalar_Value': [MyParameters.scaleValue if MyParameters.applyScalarValue else 1],
@@ -40,6 +42,7 @@ class MyDataFrame:
     def processToDataFrame(self, data):
         myDataFrame = pd.DataFrame(data)
 
+        # don't use in testing
         MyDataFrame.saveDataFrame(myDataFrame)
 
 
@@ -102,6 +105,100 @@ class MyDataFrame:
 
         return file_path
     
+        
+    #not used
+    def getDataFrameByName(self, modelName):
+
+
+        df = pd.read_csv('saved_data/my_dataframe.csv')
+
+        filtered_row = df[df['Name'] == modelName]
+
+        if not filtered_row.empty:
+            
+            return filtered_row
+        
+        else:
+
+            print(f"No data found for the name: {modelName}")
+
+    def getModelScoreValue(self, mr, value, kfoldIndex, nfold):
+
+        extraDigit = ''
+
+        if mr< 10:
+            extraDigit = '0'
+
+        dfFilteredRows = MyDataFrame.getDataFrameByParameters(mr, value, kfoldIndex, nfold)
+
+        # modelName = 'saved_models/SVM' + extraDigit + str(mr) + '-' + str(value) + '-' + str(kfoldIndex) + '-of-' + str(nfold)
+
+        # print('modelName: ', modelName)
+        
+        # print('len(dfFilteredRow): ', len(dfFilteredRows))
+
+        # print('dfFilteredRow: ', dfFilteredRow)
+
+        # print('Accuracy_Score: ', dfFilteredRows.iloc[0]['Accuracy_Score'])
+
+        return dfFilteredRows.iloc[0]['Accuracy_Score']
+
+
+    def getDataFrameByParameters(mr, value, kFoldIndex, nfold):
+
+        mrColumnName = MyDataFrame.getColumnNameFromMr(mr)
+
+        # print('mrColumnName: ', mrColumnName)
+
+        df = pd.read_csv('saved_data/my_dataframe.csv')
+
+        mr_condition = df[mrColumnName] == value
+
+        nfold_condition = df['fold_index'] == kFoldIndex
+        kfold_condition = df['n_fold'] == nfold
+
+        combined_condition = mr_condition & kfold_condition & nfold_condition
+
+        # combined_condition = mr_condition & kfold_condition & nfold_condition
+
+        filtered_rows = df[combined_condition]
+        
+        # filtered_row = df[df['Name'] == modelName]
+
+        if not filtered_rows.empty:
+            
+            return filtered_rows
+        
+        else:
+
+            print(f"No data frame found for the parameters")
+
+
+    
+    def getColumnNameFromMr(mr):
+
+        if mr == 0:
+            return 'Used_Metamorphic'
+        
+        elif mr == 1:
+            return 'Scalar_Value'    
+
+        elif mr == 2:
+
+            return 'Angle_Rotation'
+        
+        elif mr == 3:
+
+            return 'Apply_Permutation'
+
+        elif mr == 4:
+
+            return 'Invert_Labels'
+
+        elif mr == 5:
+
+            return 'Perturb_Noise'
+
         
 
 

@@ -1,0 +1,6 @@
+
+@given(text()): a function that will go through the possible test cases
+
+@example(""): specifies exactly that a certain test case is executed
+
+@given(s=st.text()): if more than an argument

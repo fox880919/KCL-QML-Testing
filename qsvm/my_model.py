@@ -14,18 +14,22 @@ class MyModel:
 
     myDill = MyDill()
 
-    def trainModel(self, getQKernel, input_tr, output_tr):
+    def trainModel(self, getQKernel, input_tr, output_tr, modelName, fold_index):
 
         # print('myKernel.getQKernel:', myKernel.getQKernel)
 
         # print('1- myKernel.np:', myKernel.np)
 
         # print('myKernel.getQKernel: ', myKernel.getQKernel)
+
         svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
 
-        print('svc:', SVC)
+        # print('svc:', SVC)
 
-        MyModel.saveModel(SVC, f'saved_models/{MyParameters.modelName}')  
+        # don't use in testing
+        MyModel.saveModel(SVC, f'saved_models/{modelName}')  
+
+        # MyModel.saveModel(SVC, f'saved_models/{modelName}')  
 
         # MyJoblib.saveModelToFile(SVC, f'saved_models/{MyParameters.modelName}')  
 
@@ -33,12 +37,19 @@ class MyModel:
 
     def predictOneItem(self, svmModel, input_test, index):
 
+        # print('svmModel: ', svmModel)
+        # print('input_test: ', input_test)
+        # print('index: ', index)
+
         # myJoblib = MyJoblib()
 
         # svm = myJoblib.l
 
 
+        single_input = input_test[index]
         svmPrediction = svmModel.predict([input_test[index]])
+        # svmPrediction = svmModel.predict(single_input)
+        
 
         # print('svmPrediction: ', svmPrediction)
 

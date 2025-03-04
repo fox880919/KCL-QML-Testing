@@ -26,9 +26,12 @@ class MyQSVM:
 
     myKernel = MyKernel()
 
-    def startSVC(self, np, input_tr, input_test, output_tr, output_test, featureMapType = 0, components = 8):
+    def startSVC(self, np, input_tr, input_test, output_tr, output_test, modelName, fold_index, featureMapType = 0, components = 8):
         
         MyQSVM.np = np
+
+        # fullModelName = 'saved_models/' + modelName
+        fullModelName = modelName
 
         myFeatureMap = MyFeatureMap()
 
@@ -40,13 +43,19 @@ class MyQSVM:
 
         # svm = MyQSVM.myModel.trainModel(MyQSVM.getQKernel, input_tr, output_tr)
 
-        if not MyParameters.usedTrainedModel:
-            svm = MyQSVM.myModel.trainModel(MyQSVM.myKernel.getQKernel, input_tr, output_tr)
+        if not MyParameters.useTrainedModel:
+
+            print('train model')
+
+            svm = MyQSVM.myModel.trainModel(MyQSVM.myKernel.getQKernel, input_tr, output_tr, fullModelName, fold_index)
             # MyQSVM.myModel.saveModel(svm, 'saved_models/svm00')
         else:
-            savedSVC = MyQSVM.myModel.getModel('saved_models/svm00')
+
+            print('get saved model')
+            savedSVC = MyQSVM.myModel.getModel(fullModelName)
             svm = savedSVC().fit(input_tr, output_tr)
 
+        return 
         svmPredictions = MyQSVM.myModel.predictAll(svm, input_test)
 
         myAccuracyScore = MyQSVM.myModel.getAccuracyScore(svmPredictions, output_test)

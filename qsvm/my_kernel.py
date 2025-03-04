@@ -20,37 +20,37 @@ class MyKernel:
 
     myModel = MyModel()
 
-    def startSVC(self, np, input_tr, input_test, output_tr, output_test, featureMapType = 0, components = 8):
+    # def startSVC(self, np, input_tr, input_test, output_tr, output_test, featureMapType = 0, components = 8):
         
-        MyKernel.np = np
+    #     MyKernel.np = np
 
-        # print('in start SVC')
+    #     # print('in start SVC')
 
-        # print('np is: ', np)
+    #     # print('np is: ', np)
 
-        # print('np is: ', MyKernel.np)
+    #     # print('np is: ', MyKernel.np)
 
-        myFeatureMap = MyFeatureMap()
+    #     myFeatureMap = MyFeatureMap()
         
-        MyKernel.mySelectedFeatureMap = myFeatureMap.pickFeatureMapType(np, featureMapType, components)
+    #     MyKernel.mySelectedFeatureMap = myFeatureMap.pickFeatureMapType(np, featureMapType, components)
 
-        # svm = SVC(kernel = MyKernel.__getQKernel).fit(input_tr, output_tr)
+    #     # svm = SVC(kernel = MyKernel.__getQKernel).fit(input_tr, output_tr)
         
-        # svmPrediction = svm.predict(input_test)
+    #     # svmPrediction = svm.predict(input_test)
 
-        # myAccuracyScore = accuracy_score(svmPrediction, output_test)
+    #     # myAccuracyScore = accuracy_score(svmPrediction, output_test)
 
-        # # myAccuracyScore = accuracy_score(svm.predict(input_test), output_test)
+    #     # # myAccuracyScore = accuracy_score(svm.predict(input_test), output_test)
 
-        svm = MyKernel.myModel.trainModel(MyKernel.__getQKernel, input_tr, output_tr)
+    #     svm = MyKernel.myModel.trainModel(MyKernel.__getQKernel, input_tr, output_tr)
 
-        svmPredictions = MyKernel.myModel.predictAll(svm, input_test)
+    #     svmPredictions = MyKernel.myModel.predictAll(svm, input_test)
 
-        myAccuracyScore = MyKernel.myModel.getAccuracyScore(svmPredictions, output_test)
+    #     myAccuracyScore = MyKernel.myModel.getAccuracyScore(svmPredictions, output_test)
 
-        # print('accuracy score:', myAccuracyScore)
+    #     # print('accuracy score:', myAccuracyScore)
 
-        return myAccuracyScore
+    #     return myAccuracyScore
 
 
     def getQKernel(self, A, B):

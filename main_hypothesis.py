@@ -8,6 +8,9 @@ sys.path.insert(2, './classes')
 sys.path.insert(3, './qsvm')
 sys.path.insert(4, './metamorphic')
 
+from hypothesis import given, strategies as st
+
+
 from classes.parameters import MyParameters
 
 from classes.read_user_input import ReadUserInput
@@ -16,291 +19,69 @@ from data.data_manager import DataManager
 
 from qsvm.my_kernel import MyKernel
 
+from qsvm.my_qsvm import MyQSVM
+
 from data.my_dataframe import MyDataFrame
 
 from metamorphic.my_metamorphic_testing import MyMetamorphicTesting
 
 from qsvm.my_pca import MyPCA
 
+from main_class import MyMain
 
-dataManager = DataManager()
 
-# myParameters = MyParameters()
-
-readUserInput = ReadUserInput()
-
-useDefaultParameters = False
-
-usedParameters = {'dataType': 1, 'featureMapType': 1, 'components': 8}
-
-myMetamorphicTesting = MyMetamorphicTesting()
-
-myMetamorphicTesting.myInit()
-
-def DoUserWantToUseDefaultParameters():
-
-    return readUserInput.checkIfUserWantsToUseDefaultParameters()
-
-def DoUserWantToUseMRs():
-
-    if MyParameters.AskUserToApplyMRs:
-
-        message = "Should we apply MRs? (0 for Yes, and 1 for No)"
-
-        applyMRs = readUserInput.readGenericBoleanInput(message)
-
-        MyParameters.applyMRs = applyMRs
-
-        return applyMRs
-    else:
-        return False
-
-def checkImplementingPCA(x_tr, x_test):
-
-    if not useDefaultParameters:
-
-        featureMapType = readUserInput.readFeatureMapTypeInput()
-
-    else: 
-
-        featureMapType = MyParameters.featureMapType   
-
-        print('default featureMapType is: ', featureMapType)
-
-        usedParameters['featureMapType'] = featureMapType
-
-        # return;
-
-    components = 0
-
-    if featureMapType == 1:
-
-        defaultNumber = MyParameters.pca_components
-
-        message = "Enter components number for PCA (default: {defaultNumber}):"
-        
-        if not useDefaultParameters:
-
-            components = readUserInput.readGeneralNumericInput(message, defaultNumber)
-        else:
-
-            components = MyParameters.pca_components   
-
-            print('default components number is: ', components)
-
-        myPCA = MyPCA()
-
-        x_tr, x_test = myPCA.implementPCA(x_tr, x_test, components)
-
-        MyParameters.pca_components = components
-
-        if(MyParameters.featureMapType == 1):
-
-            print('applied PCA with components number:', components)
-
-
-    usedParameters['components'] = components
-
-
-    return x_tr, x_test
-
-def getData():
-
-    if not useDefaultParameters:
-        dataType = readUserInput.readDataTypeInput()
-    else:
-
-        dataType = MyParameters.dataType
-
-        print('default dataType is: ', dataType)
-
-    usedParameters['dataType'] = dataType
-
-    np, x_tr, x_test, y_tr, y_test = dataManager.getDatabyNumber(dataType)
-
-    # print('original x_tr: ', x_tr[0])
-
-    # if MyParameters.applyAngleRotation:
-
-        # x_tr, x_test = checkImplementingPCA(x_tr, x_test)
-
-    x_tr, x_test = checkImplementingPCA(x_tr, x_test)
-
-    # print('after PCA x_tr: ', x_tr[0])
-
-    
-    #1
-    if MyParameters.applyScalarValue:
-        x_tr, x_test = myMetamorphicTesting.scaleInputData(x_tr, x_test, MyParameters.scaleValue)
-        print('scaled x_tr and x_test by:', MyParameters.scaleValue)
-
-    
-    #2
-    if MyParameters.applyAngleRotation:
-
-        # print('before rotation')
-        # print(x_test)
-
-
-        x_tr = myMetamorphicTesting.rotateInputDataWithAngle(x_tr, MyParameters.angle)
-        x_test = myMetamorphicTesting.rotateInputDataWithAngle(x_test, MyParameters.angle)
-
-        # print('after rotation x_tr: ', x_tr[0])
-
-        print('rotated x_tr and x_test with angle ', MyParameters.angle)
-
-        # print('after rotation')
-        # print(x_test)
-
-
-    #3
-    if MyParameters.applyPermutation:
-        x_tr, y_tr= myMetamorphicTesting.permutateInputData(x_tr, y_tr)
-
-        print('permutated both of x_tr and y_tr')
-
-
-    #4
-    if MyParameters.invertAllLabels:
-        y_tr, y_test= myMetamorphicTesting.invertAllLabels(y_tr, y_test, MyParameters.numberOfLabelsClasses)
-
-        print('inverted labels of both of y_tr and y_test')
-
-
-    #5
-    if MyParameters.applyPerturbNoise:
-        x_test = myMetamorphicTesting.perturbParameters(x_test, MyParameters.perturbNoise)
-
-        print('applyed noise by {delta} to x_test')
-
-    
-
-    #6
-    if MyParameters.modifyCircuitDepth:
-        myMetamorphicTesting.modifyCircuitDepth(MyParameters.featureMapType)
-
-
-    # print('MyParameters.addAdditionalFeature: ', MyParameters.addAdditionalFeature)
-
-    #7
-    if MyParameters.addAdditionalFeature:
-        
-        # print('before x_tr[0]: ', x_tr[0])
-        x_tr, x_test = myMetamorphicTesting.addingAdditionalFeature(x_tr, x_test)
-
-        print('MyParameters.pca_components: ', MyParameters.pca_components)
-        # print('after addAdditionalFeature x_tr.shape: ', x_tr.shape)
-        # print('after addAdditionalFeature x_test.shape: ', x_test.shape)
-        # print('after x_tr[0]: ', x_tr[0])
-
-    #8
-    if MyParameters.addAdditionalInputsAndOutputs:
-    
-        x_tr, x_test, y_tr, y_test  = myMetamorphicTesting.addingRedundantInputsAndOutputs(x_tr, x_test, y_tr, y_test)
-
-        # print('after addAdditionalInputsAndOutputs x_tr.shape: ', x_tr.shape)
-        # print('after addAdditionalInputsAndOutputs x_test.shape: ', x_test.shape)
-        # print('after addAdditionalInputsAndOutputs y_tr.shape: ', y_tr.shape)
-        # print('after addAdditionalInputsAndOutputs y_test.shape: ', y_test.shape)
- 
-
-    # print('x_tr: ', x_tr)
-
-    # if not MyParameters.applyAngleRotation:
-
-    #     x_tr, x_test = checkImplementingPCA(x_tr, x_test)
-
-
-    return np, x_tr, x_test, y_tr, y_test
-
-
-def useQSVM(np, x_tr, x_test, y_tr, y_test):
-
-    myKernel = MyKernel()
-
-    myAccuracyScore = myKernel.startSVC(np, x_tr, x_test, y_tr, y_test, MyParameters.featureMapType, MyParameters.pca_components)
-
-    return myAccuracyScore
-
-def useQSVMWithMetamorphic():
-    myMetamorphicTesting = MyMetamorphicTesting()
-    myMetamorphicTesting.myInit()
-    input_tr, input_test, output_tr, output_test = myMetamorphicTesting.pickTypeAndPrepareData(type)
-    # nqubits, kernel_cerc = myMetamorphicTesting.getCiruitDetails()
-    nqubits = myMetamorphicTesting.getCiruitDetails()
-
-    return nqubits, input_tr, input_test, output_tr, output_test
-
-def saveToDataFrame(myAccuracyScore, usedMetaMorphic):
-    
-    dateAndTime = MyTimeHelper().getTimeNow()
-    
-    myDataFrame = MyDataFrame()
-
-    formattedData = myDataFrame.formatData(myAccuracyScore, usedMetaMorphic, usedParameters, dateAndTime)
-
-    print('formattedData: ', formattedData)
-
-    myDataFrame.processToDataFrame(formattedData)
-    
-
-def runMain():
-
-    # MyParameters = newParameters
- 
-    np, x_tr, x_test, y_tr, y_test = getData()
-
-    print('data is prepared')
-
-    myAccuracyScore = useQSVM(np, x_tr, x_test, y_tr, y_test)
-
-    print('myAccuracyScore: ', myAccuracyScore)
-    saveToDataFrame(myAccuracyScore, usedMetaMorphic = False)
-
-    print('process is finished')
-
-    return myAccuracyScore
-# nqubits, input_tr, input_test, output_tr, output_test = useQSVMWithMetamorphic()
-
-
-from hypothesis import example, given, strategies as st
-
-from hypothesis.strategies import text
-
-from hypothesis.strategies import integers
-
-def tryManyParameters(scalarValue):
-
-
-    #1
-    MyParameters.featureMapType = 0
-    MyParameters.applyScalarValue = True
-    MyParameters.scaleValue = scalarValue
-    runMain()
-    MyParameters.applyScalarValue = False
-
-
-
-@given(integers(min_value=2, max_value=10))
-def test_try_many_parameters(x):
-
-    myAccuracyScore = tryManyParameters(x)
-
-    assert myAccuracyScore == 1.0
-
+myMain = MyMain()
 
 if MyParameters.askUserToInputParameters:
 
-    useDefaultParameters = DoUserWantToUseDefaultParameters()
+    MyParameters.useParametersClassParameters = myMain.DoUserWantToUseDefaultParameters()
+
 else:
-    useDefaultParameters = True
+    MyParameters.useParametersClassParameters = True
 
 
 if MyParameters.AskUserToApplyMRs:
 
-    useMetamorphicRelations = DoUserWantToUseMRs()
+    useMetamorphicRelations = myMain.DoUserWantToUseMRs()
+
+def choose_y_strategy(x):
+    if x == 1:
+        return st.integers(min_value=2, max_value = 20)  # y must be positive
+   
+    elif x == 2:
+        return st.floats(min_value=0.1, max_value=0.9)  # y must be negative
+    
+    elif x == 3:
+        return st.none()
+
+    elif x == 4:
+        return st.none()
+   
+    elif x == 5:
+        
+        min_value = 1
+        max_value = 20
+        step = 2
+        return st.integers(min_value=min_value, max_value=max_value).map(lambda val: min_value + (val // step) * step)
+    
+    else:
+        return st.none()  # y can be any integer
 
 
 
+@given(mrNumber = st.integers(min_value=1, max_value=5), value = st.floats().flatmap(lambda mrNumber: choose_y_strategy(mrNumber)))
+def loopThroughParametersForMRs(mrNumber, value):
+    
+    roundMessage = 'starting round of '+ str(mrNumber) + ' and value ' + str(value)
+    print(roundMessage)
 
-test_try_many_parameters()
+    myMain.useMR(mrNumber, value)
+
+
+if __name__ == "__main__":
+    loopThroughParametersForMRs()
+
+# tryManyParameters()
+
+# loopThroughParametersForMain()
+

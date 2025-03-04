@@ -41,8 +41,10 @@ class MyFeatureMap:
 
         elif(type == 1):
 
+            # print('getting angle embedding')
             MyFeatureMap.nqubits = components
 
+            MyFeatureMap.nqubits = 8
             # MyFeatureMap.__implementPCA(components)
             MyFeatureMap.selectedFeatureMap = MyFeatureMap.__getAngleEmdedding
 

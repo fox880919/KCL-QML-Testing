@@ -22,7 +22,6 @@ dataManager =DataManager()
 myModel = MyModel()
 
 def getElementsComparison():
-    
 
     nfold = 16
 
@@ -47,14 +46,18 @@ def getElementsComparison():
         x_tr, y_tr = train_data_list[fold_index]
         x_test, y_test = test_data_list[fold_index]
 
-
+        # print(f'for fold_index: {fold_index}, len(x_test): {len(x_test)}' )
+        # continue
         originalModelDigit = 0
         originalModelFeatureMapDigit = 0
 
 
-        OriginalodelName = 'SVM'+ str(0) + str(originalModelDigit)+ '-' + str(originalModelFeatureMapDigit) + '-' + str(fold_index) + '-of-' + str(nfold)
-
-        fullOriginalModelName = f'saved_models/{OriginalodelName}'
+        # OriginalModelName = 'SVM'+ str(0) + str(originalModelDigit)+ '-' + str(originalModelFeatureMapDigit) + '-' + str(fold_index) + '-of-' + str(nfold)
+        OriginalModelName = MyParameters.getModelName(originalModelDigit, originalModelFeatureMapDigit, fold_index, nfold)
+        
+        # fullOriginalModelName = f'saved_models/{OriginalModelName}'
+        fullOriginalModelName = MyParameters.getFullPathModelName(OriginalModelName)
+        
         # print('fullModelName: ', fullModelName)                    
 
         OriginalSavedModel = myModel.getModel(fullOriginalModelName)
@@ -101,7 +104,7 @@ def getElementsComparison():
 
                         else:
                             DoNothing = True
-                            # print('they are equal')
+                            print(f'#{total} they are equal')
                         
                         total = total + 1
                             # print(f'for x_test[{x_test_index}], originalResultedLabel = {originalResultedLabel} and resultedLabel = {resultedLabel}')

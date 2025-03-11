@@ -255,7 +255,9 @@ class MyMain():
             # return
             x_tr, x_test, y_tr, y_test = MyMain.dataModification(x_tr, x_test, y_tr, y_test)
 
-            modelName = 'SVM'+ str(0) + str(mrNumber)+ '-' + str(mrValue) + '-' + str(fold_index) + '-of-' + str(MyParameters.n_folds)
+            # modelName = 'SVM'+ str(0) + str(mrNumber)+ '-' + str(mrValue) + '-' + str(fold_index) + '-of-' + str(MyParameters.n_folds)
+
+            modelName = MyParameters.getModelName(mrNumber, mrValue, fold_index, MyParameters.n_folds)
 
             print('modelName is: ', modelName)
 

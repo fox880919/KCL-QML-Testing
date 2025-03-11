@@ -28,6 +28,9 @@ mandatory †ø install
 
 // 1-8 => pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-runtime hypothesis pytest joblib pickle
 
+// pip3 install plotly
+
+
 
 
 

@@ -51,6 +51,13 @@ class MyParameters:
     featureMaps=['Amplitude Embedding', 'Angle Embedding', 'Custom Embedding']
 
 
+    def getModelName(mrNumber, mrValue, fold_index, n_folds):
+
+        return 'SVM'+ str(0) + str(mrNumber)+ '-' + str(mrValue) + '-' + str(fold_index) + '-of-' + str(n_folds)
+
+    def getFullPathModelName(modelName):
+
+        return f'saved_models/{modelName}'
 
 
     def resetParameters():

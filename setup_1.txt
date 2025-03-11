@@ -53,6 +53,8 @@ inspection
  python3 -m pip
 
 
+//pip3 install statsmodels
+
 
 
 

@@ -99,7 +99,7 @@ class MyDataFrame:
          # Construct the target folder path
         # print('target_folder: ', target_folder)
 
-        file_path = os.path.join(target_folder, 'my_dataframe.csv')
+        file_path = os.path.join(target_folder, MyParameters.savingFileName)
 
         # print('file_path is:', file_path)
 
@@ -150,7 +150,8 @@ class MyDataFrame:
 
         # print('mrColumnName: ', mrColumnName)
 
-        df = pd.read_csv('saved_data/my_dataframe.csv')
+        # df = pd.read_csv('saved_data/my_dataframe.csv')
+        df = pd.read_csv(f'saved_data/{MyParameters.savingFileName}')
 
         mr_condition = df[mrColumnName] == value
 

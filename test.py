@@ -1,14 +1,23 @@
-from statsmodels.stats.contingency_tables import mcnemar
+from sklearn.datasets import load_digits
+from sklearn.decomposition import PCA
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
 
-# Example: Contingency table for misclassifications
-# Model1 correct, Model2 correct: 50
-# Model1 correct, Model2 wrong: 0
-# Model1 wrong, Model2 correct: 0
-# Model1 wrong, Model2 wrong: 50
-contingency_table = [[50, 0],
-                     [0, 50]]
+from sklearn.datasets import fetch_openml
 
-# Perform McNemar's test
-result = mcnemar(contingency_table, exact=True)
-print(f"McNemar's test statistic: {result.statistic}")
-print(f"P-value: {result.pvalue}")
+
+fashion_mnist = fetch_openml("Fashion-MNIST", version=1, as_frame=False)
+x = fashion_mnist.data.astype('float32') / 255.0
+y = fashion_mnist.target.astype('int')
+
+# print(f'x: {x}')
+# print(f'y: {y}')
+
+print(f'len(x): {len(x)}')
+print(f'len(x): {len(y)}')
+
+from datetime import datetime
+time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+print(f'time: {time}')

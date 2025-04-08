@@ -2,6 +2,9 @@ import sys
 
 from classes.time import MyTimeHelper
 
+from datetime import datetime
+
+
 sys.path.insert(0, './data')
 sys.path.insert(1, './metamorphic')
 sys.path.insert(2, './classes')
@@ -69,7 +72,7 @@ class MyMain():
 
             featureMapType = MyParameters.featureMapType   
 
-            print('default featureMapType is: ', featureMapType)
+            # print('default featureMapType is: ', featureMapType)
 
             MyMain.usedParameters['featureMapType'] = featureMapType
 
@@ -77,6 +80,7 @@ class MyMain():
 
         components = 0
 
+        print(f'featureMapType: {featureMapType}')
         if featureMapType == 1:
 
             print('in featureMapType == 1')
@@ -104,6 +108,17 @@ class MyMain():
             if(MyParameters.featureMapType == 1):
 
                 print('applied PCA with components number:', components)
+        
+        else: 
+            
+            if MyParameters.alwaysUsePCA:
+                myPCA = MyPCA()
+
+                x_tr, x_test = myPCA.implementPCA(x_tr, x_test, MyParameters.pca_components)
+            
+            else:
+                print('no PCA applied')
+
 
 
         MyMain.usedParameters['components'] = components
@@ -131,10 +146,13 @@ class MyMain():
     
     def dataModification(x_tr, x_test, y_tr, y_test):
 
-        print('before pca, x_tr[0]: ', x_tr[0])
+        # print('before pca, x_tr[0]: ', x_tr[0])
+        print('before pca, len(x_tr[0]): ', len(x_tr[0]))
+
         x_tr, x_test = MyMain.checkImplementingPCA(x_tr, x_test)
 
-        print('after pca x_tr[0]: ', x_tr[0])
+        # print('after pca x_tr[0]: ', x_tr[0])
+        print('after pca len(x_tr[0]: ', len(x_tr[0]))
 
         #1
         if MyParameters.applyScalarValue:
@@ -215,6 +233,12 @@ class MyMain():
 
             MyParameters.scaleValue = mrValue
 
+            #to do one scalar value and skip others if wanted
+            if MyParameters.doOneScalar == True:
+                if mrValue != MyParameters.onlyScalarValue:
+                    return;    
+
+
         elif mrNumber == 2:
 
             MyParameters.featureMapType = 1
@@ -244,10 +268,34 @@ class MyMain():
         np, train_data_list, test_data_list = MyMain.getListOfFoldData()
 
         # print('len(train_data_list) = ', len(train_data_list))
+        # print('len(train_data_list[0]) = ', len(train_data_list[0]))
+
+        print('len(train_data_list[0][0]) = ', len(train_data_list[0][0]))
 
         # print('train_data_list = ', train_data_list)
 
+        # return;
+    
         for fold_index in range(len(train_data_list)):
+
+            # print(f'checking MyParameters.doOneKfold == {MyParameters.doOneKfold}')
+
+            time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+            # if fold_index == 0:
+            #     continue
+
+            print(f'starttime of kfold({fold_index}): {time}')
+            
+            # print(f'checking {fold_index} == {MyParameters.onlyKFoldValue}: {fold_index == MyParameters.onlyKFoldValue}')
+            #to do one kfold and skip others if wanted
+            if MyParameters.doOneKfold == True:
+                # if fold_index != MyParameters.onlyKFoldValue:
+                if fold_index != MyParameters.onlyKFoldValue:
+            
+                    continue
+
             x_tr, y_tr = train_data_list[fold_index]
             x_test, y_test = test_data_list[fold_index]
 
@@ -264,6 +312,9 @@ class MyMain():
             myAccuracyScore = MyMain.useQSVM(np, x_tr, x_test, y_tr, y_test, modelName, fold_index)
 
             MyMain.saveToDataFrame(myAccuracyScore, usedMetaMorphic, fold_index)
+            
+            print(f'endtime of kfold({fold_index}): {time}')
+
 
 
     def saveToDataFrame(myAccuracyScore, usedMetaMorphic, foldIndex):

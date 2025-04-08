@@ -55,43 +55,45 @@ def loopThroughParametersForMRs(mrNumber, value):
 
 
 
-for i in range(0, 6):
+def start():
+    for i in range(0, 6):
 
-    if i == 0:
+        if i == 0:
 
-        loopThroughParametersForMRs(i, 0)
+            loopThroughParametersForMRs(i, 0)
 
-        MyParameters.featureMapType = 1
-        loopThroughParametersForMRs(0, 0)  
+            # MyParameters.featureMapType = 1
+            # loopThroughParametersForMRs(0, 0)  
 
-        # MyParameters.featureMapType = 2
-        # loopThroughParametersForMRs(0, 0)  
+            # MyParameters.featureMapType = 2
+            # loopThroughParametersForMRs(0, 0)  
 
-    if i == 1:
+        if i == 1:
 
-        for j in range(2, 20):
+            for j in range(MyParameters.fromScaleValue, MyParameters.toScaleValue):
+            # for j in range(4, 20):
 
-            loopThroughParametersForMRs(i, j)
+                loopThroughParametersForMRs(i, j)
 
-    # if i == 2:
+        # if i == 2:
 
-    #     for j in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
+        #     for j in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
 
-    #         loopThroughParametersForMRs(i, j)
+        #         loopThroughParametersForMRs(i, j)
 
-    if i == 3:
+        # if i == 3:
 
-        loopThroughParametersForMRs(i, 0)
+        #     loopThroughParametersForMRs(i, 0)
 
-    if i == 4:
+        # if i == 4:
 
-        loopThroughParametersForMRs(i, 0)
+        #     loopThroughParametersForMRs(i, 0)
 
-    # if i == 5:
+        # if i == 5:
 
-    #     for j in [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]:
+        #     for j in [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]:
 
-    #         loopThroughParametersForMRs(i, j)
+        #         loopThroughParametersForMRs(i, j)
 
-
+start()
 

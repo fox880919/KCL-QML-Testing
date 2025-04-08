@@ -1,0 +1,33 @@
+
+
+for saved_models_noisy1, we used the first type of noise
+
+1- Fix Parameters first
+
+2- check data manager
+
+3- python3 main_script.py
+
+4- python3 comparison_script_statistical.py
+
+5- python3 plot5.py
+
+
+
+
+
+
+for saved_models_all_noise, we will use all noise
+
+1- Fix Parameters first
+
+2- check data manager
+
+3- python3 main_script.py
+
+4- python3 comparison_script_statistical.py
+
+6- python3 plot5.py
+
+note: in this experiement, I decreased the samples from 70000 to 700 to expedite
+

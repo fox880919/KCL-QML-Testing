@@ -6,109 +6,101 @@ from classes.default_parameters import DefaultParameters
 
 class MyParameters:
 
-    useParametersClassParameters = DefaultParameters.useParametersClassParameters
+    useParametersClassParameters = True
 
-    n_folds = DefaultParameters.n_folds
+    n_folds = 4
     # 0 = wine data
     # dataType = 0
     
     # 2 = creditcard
     # 3 = mnist
-    dataType = DefaultParameters.dataType
+    dataType = 2
 
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
-    featureMapType = DefaultParameters.featureMapType
+    featureMapType = 0
 
-    alwaysUsePCA = DefaultParameters.alwaysUsePCA 
+    alwaysUsePCA = False 
 
     # pca_components = 8
 
-    pca_components = DefaultParameters.pca_components
+    pca_components = 6
 
 
-    applyMRs = DefaultParameters.applyMRs
+    applyMRs = True
 
-    AskUserToApplyMRs = DefaultParameters.AskUserToApplyMRs
+    AskUserToApplyMRs = False
 
-    askUserToInputParameters = DefaultParameters.askUserToInputParameters
+    askUserToInputParameters = False
 
-    applyScalarValue = DefaultParameters.applyScalarValue
-    scaleValue = DefaultParameters.scaleValue
+    applyScalarValue = False
+    scaleValue = 3
 
-    fromScaleValue = DefaultParameters.fromScaleValue
+    fromScaleValue = 2
 
     # toScaleValue = 20
-    toScaleValue = DefaultParameters.toScaleValue
+    toScaleValue = 5
     
-    applyAngleRotation = DefaultParameters.applyAngleRotation
-    angle = DefaultParameters.angle
+    applyAngleRotation = False
+    angle = 2* np.pi 
 
-    applyPermutation = DefaultParameters.applyPermutation
+    applyPermutation = False
 
-    invertAllLabels = DefaultParameters.invertAllLabels
-    numberOfLabelsClasses = DefaultParameters.numberOfLabelsClasses
+    invertAllLabels = False
+    numberOfLabelsClasses = 3
 
-    applyPerturbNoise = DefaultParameters.applyPerturbNoise
-    perturbNoise = DefaultParameters.perturbNoise
+    applyPerturbNoise = False
+    perturbNoise = 0.1
 
-    circuitDepth = DefaultParameters.circuitDepth
-    applyCircuitDepth = DefaultParameters.applyCircuitDepth
+    circuitDepth = 2
+    applyCircuitDepth = False
 
-    modifyCircuitDepth = DefaultParameters.modifyCircuitDepth
+    modifyCircuitDepth = False
 
-    addAdditionalFeature = DefaultParameters.addAdditionalFeature
+    addAdditionalFeature = False
 
-    addAdditionalInputsAndOutputs = DefaultParameters.addAdditionalInputsAndOutputs
+    addAdditionalInputsAndOutputs = False
 
-    useTrainedModel= DefaultParameters.useTrainedModel
+    useTrainedModel= False
 
-    useNoise= DefaultParameters.useNoise
+    useNoise= False
 
-    modelName = DefaultParameters.modelName
+    modelName = 'svm00'
     
-    allDataTypes= DefaultParameters.allDataTypes
+    allDataTypes=['Wine Data', 'Load Digits', 'Credit Card', 'MNIST']
 
-    featureMaps= DefaultParameters.featureMaps
+    featureMaps=['Amplitude Embedding', 'Angle Embedding', 'Custom Embedding']
 
     # savingFileName = 'my_dataframe.csv'
 
     # savingFileName = 'my_dataframe_noisy.csv'
 
-    savingFileName = DefaultParameters.savingFileName
+    savingFileName = 'my_dataframe_all_noise.csv'
 
     # savedModelsFolder = 'saved_models'
 
     # savedModelsFolder = 'saved_models_noisy'
 
-    savedModelsFolder = DefaultParameters.savedModelsFolder
+    savedModelsFolder = 'saved_models_all_noise'
 
-    applyDepolarizingChannelNoise = DefaultParameters.applyDepolarizingChannelNoise
+    applyDepolarizingChannelNoise = True
 
-    depolarizingChannelNoise = DefaultParameters.depolarizingChannelNoise
+    applyAfterEnganglementNoise = False
 
-    applyAfterEnganglementNoise = DefaultParameters.applyAfterEnganglementNoise
+    applyBitFlipNoise = False
 
-    afterEnganglementNoise = DefaultParameters.afterEnganglementNoise
+    applyPhaseDumingNoise = False
 
-    applyBitFlipNoise = DefaultParameters.applyBitFlipNoise
+    doOneKfold = False
 
-    bitFlipNoise = DefaultParameters.bitFlipNoise
+    onlyKFoldValue = 0
 
-    applyPhaseDumingNoise = DefaultParameters.applyPhaseDumingNoise
+    doOneScalar = False
 
-    phaseDumingNoise = DefaultParameters.phaseDumingNoise
+    onlyScalarValue = 3
 
-    doOneKfold = DefaultParameters.doOneKfold
+    usePercentageOfData = True
 
-    onlyKFoldValue = DefaultParameters.onlyKFoldValue
-
-    doOneScalar = DefaultParameters.doOneScalar
-
-    onlyScalarValue = DefaultParameters.onlyScalarValue
-
-    usePercentageOfData = DefaultParameters.usePercentageOfData
-
-    PercentageOfData =DefaultParameters.PercentageOfData
+    PercentageOfData = 0.002
 
     def getModelName(mrNumber, mrValue, fold_index, n_folds):
 
@@ -185,19 +177,11 @@ class MyParameters:
 
         MyParameters.applyDepolarizingChannelNoise = defaultParameters.applyDepolarizingChannelNoise
 
-        MyParameters.depolarizingChannelNoise = defaultParameters.depolarizingChannelNoise
-
         MyParameters.applyAfterEnganglementNoise = defaultParameters.applyAfterEnganglementNoise
-
-        MyParameters.afterEnganglementNoise = defaultParameters.afterEnganglementNoise
 
         MyParameters.applyBitFlipNoise = defaultParameters.applyBitFlipNoise
 
-        MyParameters.bitFlipNoise = defaultParameters.bitFlipNoise
-
         MyParameters.applyPhaseDumingNoise = defaultParameters.applyPhaseDumingNoise
-
-        MyParameters.phaseDumingNoise = defaultParameters.phaseDumingNoise
 
         MyParameters.doOneKfold = defaultParameters.doOneKfold
 

@@ -15,6 +15,8 @@ from classes.parameters import MyParameters
 class MyFeatureMap:
 
     nqubits = 4
+    amplitudeNQubits = 5
+    phasenqubits = 5
     np = {}
     x_tr = []
     x_test = []
@@ -30,12 +32,23 @@ class MyFeatureMap:
 
     # myParameters = MyParameters()
 
+    #noise model 1
+    noise_model = qml.transforms.insert(
+    qml.DepolarizingChannel,  # You can use other channels like AmplitudeDamping, PhaseDamping, etc.
+    op_positions = "all",     # Apply to all operations
+    op_args=lambda obj: (0.05,)  # Noise parameter (e.g., 0.05 depolarization probability)
+    )
+
+    #or noisy device 3
+    # dev = qml.device("default.mixed", wires=MyFeatureMap.amplitudeNQubits)
+
 
     def pickFeatureMapType(self, np, type = 0, components = 8):
         
         if(type == 0):
             
-            MyFeatureMap.nqubits = 4
+            # MyFeatureMap.nqubits = 4
+            MyFeatureMap.nqubits = 5
 
             MyFeatureMap.selectedFeatureMap = MyFeatureMap.__getAmplitudeEmdedding
 
@@ -63,14 +76,34 @@ class MyFeatureMap:
         return MyFeatureMap.selectedFeatureMap
         
 
-    @qml.qnode(qml.device("lightning.qubit", wires = 4))
+    # @qml.qnode(qml.device("lightning.qubit", wires = 4))
+    # @noise_model
+    # @qml.qnode(qml.device("lightning.qubit", wires = amplitudeNQubits))
+    #for noise use default.mixed
+    @qml.qnode(qml.device("default.mixed", wires = amplitudeNQubits))
     def __getAmplitudeEmdedding(a, b):
+        
 
         qml.AmplitudeEmbedding(
-        a, wires=range(MyFeatureMap.nqubits), pad_with=0, normalize=True)
+        a, wires=range(MyFeatureMap.amplitudeNQubits), pad_with=0, normalize=True)
+
+        #or manual noise 2
+
+        if MyParameters.applyDepolarizingChannelNoise == True:
+            for wire in range(MyFeatureMap.amplitudeNQubits):
+                qml.DepolarizingChannel(MyParameters.depolarizingChannelNoise, wires=wire)  # 5% depolarizing noise
+
+
         qml.adjoint(qml.AmplitudeEmbedding(
         b, wires=range(MyFeatureMap.nqubits), pad_with=0, normalize=True))
+
+        #or manual noise
+        if MyParameters.applyBitFlipNoise == True:
+            for wire in range(MyFeatureMap.amplitudeNQubits):
+                qml.BitFlip(MyParameters.bitFlipNoise, wires=wire) # 5% depolarizing noise
+
         return qml.probs(wires = range(MyFeatureMap.nqubits))
+
 
     def __implementPCA(components = 8):
         
@@ -135,4 +168,12 @@ class MyFeatureMap:
     #     return MyQSVM.np.array([[MyQSVM.modifiedCircuit(a, b)[0] for b in B] for a in A])
 
 
-
+    # custom noise 4
+    # def custom_noise(op, **kwargs):
+    # # Apply the original operation
+    # op()
+    
+    # # Add custom noise
+    # for wire in op.wires:
+    #     qml.DepolarizingChannel(0.03, wires=wire)
+    #     qml.PhaseDamping(0.02, wires=wire)

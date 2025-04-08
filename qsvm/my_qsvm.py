@@ -45,9 +45,12 @@ class MyQSVM:
 
         if not MyParameters.useTrainedModel:
 
-            print('train model')
+            # print('train model started')
 
             svm = MyQSVM.myModel.trainModel(MyQSVM.myKernel.getQKernel, input_tr, output_tr, fullModelName, fold_index)
+
+            # print('train model ended ')
+
             # MyQSVM.myModel.saveModel(svm, 'saved_models/svm00')
         else:
 
@@ -55,7 +58,7 @@ class MyQSVM:
             savedSVC = MyQSVM.myModel.getModel(fullModelName)
             svm = savedSVC().fit(input_tr, output_tr)
 
-        return 
+        # return 
         svmPredictions = MyQSVM.myModel.predictAll(svm, input_test)
 
         myAccuracyScore = MyQSVM.myModel.getAccuracyScore(svmPredictions, output_test)

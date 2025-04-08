@@ -41,7 +41,7 @@ def getElementsComparison():
     for fold_index in range(len(train_data_list)):
 
         #1
-        # print('for fold_index: ', fold_index)
+        print('for fold_index: ', fold_index)
 
         x_tr, y_tr = train_data_list[fold_index]
         x_test, y_test = test_data_list[fold_index]
@@ -83,6 +83,8 @@ def getElementsComparison():
 
                     fullModelName = f'saved_models/{modelName}'
 
+                    print(f'fullModelName: ${fullModelName}')
+
                     SavedModel = myModel.getModel(fullModelName)
 
                     trainedModel = SavedModel().fit(x_tr, y_tr)
@@ -94,8 +96,14 @@ def getElementsComparison():
                         # print('for x_test_index: ', x_test_index)
 
                         originalResultedLabel = myModel.predictOneItem(OriginalTrainedModel, x_test, x_test_index)
-                    
+
+                        print(f'originalResultedLabel: {originalResultedLabel}')
+
+                        # resultedLabel = myModel.predictOneItem(trainedModel, x_test, x_test_index, mrValue)
+
                         resultedLabel = myModel.predictOneItem(trainedModel, x_test, x_test_index)
+
+                        print(f'resultedLabel: {resultedLabel}')
 
                         if not originalResultedLabel == resultedLabel: 
 
@@ -104,7 +112,7 @@ def getElementsComparison():
 
                         else:
                             DoNothing = True
-                            print(f'#{total} they are equal')
+                            # print(f'#{total} they are equal')
                         
                         total = total + 1
                             # print(f'for x_test[{x_test_index}], originalResultedLabel = {originalResultedLabel} and resultedLabel = {resultedLabel}')

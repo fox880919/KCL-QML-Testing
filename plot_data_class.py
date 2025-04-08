@@ -1,6 +1,8 @@
 
 from data.my_dataframe import MyDataFrame
 
+from classes.parameters import MyParameters
+
 class MyPlotData:
 
     myDataFrame = MyDataFrame()
@@ -44,7 +46,7 @@ class MyPlotData:
             allRangeModels.append(allOriginalKFoldModels[kfoldIndex])
             allRangeModelsLabels.append(allOriginalKFoldModelsLabels[kfoldIndex])
                             
-            for mrValue in range(2, 20):
+            for mrValue in range(MyParameters.fromScaleValue, MyParameters.toScaleValue):
                 
                 mrsAccuracyScores = MyPlotData.myDataFrame.getModelScoreValue(mrNumber, mrValue, kfoldIndex, MyPlotData.nfoldIndex)
                 
@@ -89,7 +91,7 @@ class MyPlotData:
 
 
 
-        for mrValue in range(2, 20):
+        for mrValue in range(MyParameters.fromScaleValue, MyParameters.toScaleValue):
 
             tempModels = []
             tempLabels = []   

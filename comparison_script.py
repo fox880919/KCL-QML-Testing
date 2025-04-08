@@ -23,6 +23,7 @@ def getAllScores():
         
         originalAccuracyScore = myDataFrame.getModelScoreValue(0, 0, kfoldIndex, nfoldIndex)
 
+        print(f'originalAccuracyScore: {originalAccuracyScore}')
         mrsAccuracyScores = 0
 
         total = 0

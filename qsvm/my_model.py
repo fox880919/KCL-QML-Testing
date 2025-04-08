@@ -22,12 +22,21 @@ class MyModel:
 
         # print('myKernel.getQKernel: ', myKernel.getQKernel)
 
+        print('training model started')
+
         svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+
+        print('training model ended')
 
         # print('svc:', SVC)
 
         # don't use in testing
-        MyModel.saveModel(SVC, f'saved_models/{modelName}')  
+
+        print('saving model started')
+
+        MyModel.saveModel(SVC, f'{MyParameters.savedModelsFolder}/{modelName}')  
+
+        print('saving model ended')
 
         # MyModel.saveModel(SVC, f'saved_models/{modelName}')  
 
@@ -35,7 +44,7 @@ class MyModel:
 
         return svm
 
-    def predictOneItem(self, svmModel, input_test, index):
+    def predictOneItem(self, svmModel, input_test, index, mrValue = 1):
 
         # print('svmModel: ', svmModel)
         # print('input_test: ', input_test)
@@ -46,8 +55,9 @@ class MyModel:
         # svm = myJoblib.l
 
 
-        single_input = input_test[index]
-        svmPrediction = svmModel.predict([input_test[index]])
+        single_input = mrValue * input_test[index]
+
+        svmPrediction = svmModel.predict([single_input])
         # svmPrediction = svmModel.predict(single_input)
         
 

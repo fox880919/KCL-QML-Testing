@@ -8,7 +8,7 @@ sys.path.insert(2, './classes')
 sys.path.insert(3, './qsvm')
 sys.path.insert(4, './metamorphic')
 
-from hypothesis import given, strategies as st
+# from hypothesis import given, strategies as st
 
 
 from classes.parameters import MyParameters

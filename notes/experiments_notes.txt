@@ -15,8 +15,6 @@ for saved_models_noisy1, we used the first type of noise
 
 
 
-
-
 for saved_models_all_noise, we will use all noise
 
 1- Fix Parameters first

@@ -15,11 +15,11 @@ class MyParameters:
     showProgressDetails = True
 
     n_folds = DefaultParameters.n_folds
-    # 0 = wine data
-    # dataType = 0
     
+    # 0 = wine data 1 = load digits 2 = credit card 3 = mnist 4= custom
+    # dataType = 0
     # 2 = creditcard
-    # 3 = mnist
+    # 4 = mnist
     dataType = DefaultParameters.dataType
 
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
@@ -33,7 +33,6 @@ class MyParameters:
     # pca_components = 8
 
     pca_components = DefaultParameters.pca_components
-
 
     applyMRs = DefaultParameters.applyMRs
 

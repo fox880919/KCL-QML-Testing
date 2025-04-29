@@ -13,11 +13,10 @@ class DefaultParameters:
     showProgressDetails = True
 
     n_folds = 15
-    # 0 = wine data
+    # 0 = wine data 1 = load digits 2 = credit card 3 = mnist 4= custom
     # dataType = 0
     
-    # 3 = mnist
-    dataType = 0
+    dataType = 1
 
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
     featureMapType = 0
@@ -25,10 +24,10 @@ class DefaultParameters:
     amplitudeNQubits = 10
     phasenqubits = 5
 
-    alwaysUsePCA = False 
+    alwaysUsePCA = True 
 
     # pca_components = 8
-    pca_components = 4
+    pca_components = 8
 
     applyMRs = True
 
@@ -92,25 +91,25 @@ class DefaultParameters:
 
     useQiskit = False
 
-    applyDepolarizingChannelNoise = False
+    applyDepolarizingChannelNoise = True
 
-    depolarizingChannelNoise = 0.95
+    depolarizingChannelNoise = 0.5
 
     applyAfterEnganglementNoise = False
 
-    afterEnganglementNoise = 0.95
+    afterEnganglementNoise = 0.5
 
     applyBitFlipNoise = False
 
-    bitFlipNoise = 0.95
+    bitFlipNoise = 0.5
 
     applyAmplitudeDampingNoise = False
     
-    amplitudeDampingNoise = 0.95
+    amplitudeDampingNoise = 0.5
 
     applyPhaseDampingNoise = False
 
-    phaseDampingNoise = 0.65
+    phaseDampingNoise = 0.5
 
     doOneKfold = False
     

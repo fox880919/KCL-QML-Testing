@@ -10,6 +10,8 @@
 
 from my_feature_map import MyFeatureMap
 
+# from my_feature_map_qiskit import MyQiskitFeatureMap
+
 from my_kernel import MyKernel
 
 from my_model import MyModel
@@ -26,6 +28,7 @@ class MyQSVM:
 
     myKernel = MyKernel()
 
+
     def startSVC(self, np, input_tr, input_test, output_tr, output_test, modelName, fold_index, featureMapType = 0, components = 8):
         
         MyQSVM.np = np
@@ -37,7 +40,15 @@ class MyQSVM:
 
         MyQSVM.myKernel.np = MyQSVM.np
 
-        MyQSVM.mySelectedFeatureMap = myFeatureMap.pickFeatureMapType(np, featureMapType, components)
+        if MyParameters.useQiskit == False:
+
+            MyQSVM.mySelectedFeatureMap = myFeatureMap.pickFeatureMapType(np, featureMapType, components)
+
+        else:
+
+            # MyQSVM.mySelectedFeatureMap = MyQiskitFeatureMap.pickFeatureMapType(np, featureMapType, components)
+            MyQSVM.mySelectedFeatureMap = myFeatureMap.pickFeatureMapType(np, featureMapType, components)
+
 
         MyQSVM.myKernel.mySelectedFeatureMap = MyQSVM.mySelectedFeatureMap
 

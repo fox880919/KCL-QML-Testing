@@ -45,7 +45,11 @@ class MyMetamorphicTesting:
 
         mr = MyMetamorphicTesting.myMetamorphicRelations
 
+        # print(f'before scalinginput_tr : {input_tr[0]}')
+
         input_tr, input_test = mr.metamorphic_feature_scaling(input_tr, input_test, scaleValue)
+
+        # print(f'after scalinginput_tr : {input_tr[0]}')
 
         #dataManager = DataManager()
 

@@ -15,8 +15,10 @@ from classes.parameters import MyParameters
 class MyFeatureMap:
 
     nqubits = 4
-    amplitudeNQubits = 5
-    phasenqubits = 5
+    # amplitudeNQubits = 5
+    # phasenqubits = 5
+    amplitudeNQubits = MyParameters.amplitudeNQubits
+    phasenqubits = MyParameters.phasenqubits
     np = {}
     x_tr = []
     x_test = []
@@ -80,27 +82,41 @@ class MyFeatureMap:
     # @noise_model
     # @qml.qnode(qml.device("lightning.qubit", wires = amplitudeNQubits))
     #for noise use default.mixed
-    @qml.qnode(qml.device("default.mixed", wires = amplitudeNQubits))
+    # @qml.qnode(qml.device("default.mixed", wires = amplitudeNQubits))
+    @qml.qnode(qml.device(MyParameters.getDevice(), wires = amplitudeNQubits))
     def __getAmplitudeEmdedding(a, b):
         
+        # print(f'amplitudeNQubits {MyFeatureMap.amplitudeNQubits}')
+
+        if MyParameters.showProgressDetails:
+            # print(f'amplitude embedding roundNumber: {MyParameters.roundNumber}')
+            print(f'amplitude embedding inputNumber: {MyParameters.inputNumber}')
+
+            # print(f'len(A): {len(a)}, and len(B): {len(b)}')
+        
+        MyParameters.inputNumber = MyParameters.inputNumber + 1           
 
         qml.AmplitudeEmbedding(
         a, wires=range(MyFeatureMap.amplitudeNQubits), pad_with=0, normalize=True)
 
-        #or manual noise 2
-
+        ## or manual noise 1
         if MyParameters.applyDepolarizingChannelNoise == True:
             for wire in range(MyFeatureMap.amplitudeNQubits):
-                qml.DepolarizingChannel(MyParameters.depolarizingChannelNoise, wires=wire)  # 5% depolarizing noise
+                qml.DepolarizingChannel(MyParameters.depolarizingChannelNoise, wires=wire) 
 
 
         qml.adjoint(qml.AmplitudeEmbedding(
         b, wires=range(MyFeatureMap.nqubits), pad_with=0, normalize=True))
 
-        #or manual noise
+        ## or manual noise 2
+        if MyParameters.applyPhaseDumpingNoise == True:
+            for wire in range(MyFeatureMap.amplitudeNQubits):
+                qml.BitFlip(MyParameters.bitFlipNoise, wires=wire) 
+
+        ## or manual noise 3
         if MyParameters.applyBitFlipNoise == True:
             for wire in range(MyFeatureMap.amplitudeNQubits):
-                qml.BitFlip(MyParameters.bitFlipNoise, wires=wire) # 5% depolarizing noise
+                qml.BitFlip(MyParameters.bitFlipNoise, wires=wire) 
 
         return qml.probs(wires = range(MyFeatureMap.nqubits))
 
@@ -111,7 +127,8 @@ class MyFeatureMap:
         MyFeatureMap.xs_tr = pca.fit_transform(MyFeatureMap.x_tr)
         MyFeatureMap.xs_test = pca.transform(MyFeatureMap.x_test)
 
-    @qml.qnode(qml.device("lightning.qubit", wires = MyParameters.pca_components))
+    # @qml.qnode(qml.device("lightning.qubit", wires = MyParameters.pca_components))
+    @qml.qnode(qml.device(MyParameters.getDevice(), wires = MyParameters.pca_components))
     def __getAngleEmdedding(a, b):
 
         qml.AngleEmbedding(a, wires=range(MyFeatureMap.nqubits)) 
@@ -119,9 +136,9 @@ class MyFeatureMap:
         return qml.probs(wires = range(MyFeatureMap.nqubits))
 
     # @qml.qnode(dev)
-    @qml.qnode(qml.device("lightning.qubit", wires = 4))
+    # @qml.qnode(qml.device("lightning.qubit", wires = 4))
+    @qml.qnode(qml.device(MyParameters.getDevice(), wires = 4))
     def __getCustomEmdedding(a, b):
-
 
         MyFeatureMap.ZZFeatureMap(MyFeatureMap.nqubits, a)
         qml.adjoint(MyFeatureMap.ZZFeatureMap)(MyFeatureMap.nqubits, b) 

@@ -6,7 +6,7 @@ from classes.parameters import MyParameters
 
 class MyDataFrame:
 
-    def formatData(self, accuracyScore, usedMetamorphic, usedParameters, dateAndTime, foldIndex):
+    def formatData(self, accuracyScore, usedMetamorphic, usedParameters, dateAndTime, foldIndex, startTime = '', endTime = ''):
 
         # myParameters = MyParameters()
 
@@ -31,8 +31,11 @@ class MyDataFrame:
                 'Modify_Circuit_Depth': [MyParameters.modifyCircuitDepth],
                 'adding_Additional_Feature': [MyParameters.addAdditionalFeature],
                 'Adding_Additional_Data_Point': [MyParameters.addAdditionalInputsAndOutputs],
-
+                
+                'start_time': [startTime],
                 'Date_And_Time': [dateAndTime],
+                'end_time': [endTime],
+
                 }
         
         return formattedData

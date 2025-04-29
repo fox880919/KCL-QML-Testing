@@ -4,6 +4,11 @@ from classes.time import MyTimeHelper
 
 from datetime import datetime
 
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+from pennylane import numpy as np
+
+
 
 sys.path.insert(0, './data')
 sys.path.insert(1, './metamorphic')
@@ -119,16 +124,12 @@ class MyMain():
             else:
                 print('no PCA applied')
 
-
-
         MyMain.usedParameters['components'] = components
-
 
         return x_tr, x_test
     
     # def getData():
     def getListOfFoldData():
-
 
         if not MyMain.useDefaultParameters:
             dataType = MyMain.readUserInput.readDataTypeInput()
@@ -205,7 +206,33 @@ class MyMain():
 
         return  x_tr, x_test, y_tr, y_test
     
+    #not used
+    def standardizeData(x_tr, x_test):
 
+        scaler = StandardScaler()
+        x_tr2 = scaler.fit_transform(x_tr)
+        x_test2 = scaler.transform(x_test)
+
+        return x_tr2, x_test2
+    
+    #not used
+    def normalizeDataforAngleEmbedding(x_tr, x_test):
+
+        minmax_scaler = MinMaxScaler(feature_range=(0, np.pi))
+        x_tr2 = minmax_scaler.fit_transform(x_tr)
+        x_test2 = minmax_scaler.transform(x_test)
+
+        return x_tr2, x_test2
+
+    #not used
+    def maskData(input, output):
+
+        mask = (output == 0) | (output == 1)
+        input2 = input[mask]
+        output2 = output[mask]
+
+        return input2, output2
+    
     def useQSVM(np, x_tr, x_test, y_tr, y_test, modelName, fold_index):
 
 
@@ -267,10 +294,12 @@ class MyMain():
 
         np, train_data_list, test_data_list = MyMain.getListOfFoldData()
 
-        # print('len(train_data_list) = ', len(train_data_list))
+        print('kfolds = len(train_data_list) = ', len(train_data_list))
         # print('len(train_data_list[0]) = ', len(train_data_list[0]))
 
-        print('len(train_data_list[0][0]) = ', len(train_data_list[0][0]))
+        print('inputs per kfold = len(train_data_list[0][0]) = ', len(train_data_list[0][0]))
+
+        print('input dimensions len(train_data_list[0][0][0]) = ', len(train_data_list[0][0][0]))
 
         # print('train_data_list = ', train_data_list)
 
@@ -282,9 +311,8 @@ class MyMain():
 
             time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-
-            # if fold_index == 0:
-            #     continue
+            if fold_index != 0:
+                continue
 
             print(f'starttime of kfold({fold_index}): {time}')
             
@@ -309,21 +337,28 @@ class MyMain():
 
             print('modelName is: ', modelName)
 
+            startTime = MyTimeHelper().getTimeNow()
+
+            print(f'startTime: {startTime}')
             myAccuracyScore = MyMain.useQSVM(np, x_tr, x_test, y_tr, y_test, modelName, fold_index)
 
-            MyMain.saveToDataFrame(myAccuracyScore, usedMetaMorphic, fold_index)
+            endTime =  MyTimeHelper().getTimeNow()
+            print(f'endTime: {startTime}')
+
+            MyMain.saveToDataFrame(myAccuracyScore, usedMetaMorphic, fold_index, startTime, endTime)
             
             print(f'endtime of kfold({fold_index}): {time}')
 
 
 
-    def saveToDataFrame(myAccuracyScore, usedMetaMorphic, foldIndex):
+    def saveToDataFrame(myAccuracyScore, usedMetaMorphic, foldIndex, startTime ='', endTime = ''):
         
         dateAndTime = MyTimeHelper().getTimeNow()
         
         myDataFrame = MyDataFrame()
 
-        formattedData = myDataFrame.formatData(myAccuracyScore, usedMetaMorphic, MyMain.usedParameters, dateAndTime, foldIndex)
+        formattedData = myDataFrame.formatData(myAccuracyScore, usedMetaMorphic, MyMain.usedParameters, dateAndTime,
+                                                foldIndex, startTime, endTime)
 
         print('formattedData: ', formattedData)
 

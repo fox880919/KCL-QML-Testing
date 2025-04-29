@@ -10,9 +10,9 @@ myPlotData = MyPlotData()
 
 allModels, allModelsLabels = myPlotData.getAllModelsData2()
 
-# print(f'len(allModels): {len(allModels)}')
+print(f'len(allModels): {len(allModels)}')
 
-# print(f'len(allModelsLabels): {len(allModelsLabels)}')
+print(f'len(allModelsLabels): {len(allModelsLabels)}')
 
 # for index, model in enumerate(allModels):
 #     print(f'len(allModels[{index}]): {len(allModels[index])}')

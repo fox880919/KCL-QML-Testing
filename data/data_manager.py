@@ -2,6 +2,7 @@ from sklearn.decomposition import PCA
 from wine_data import WineData
 from load_digits import LoadDigits
 from kaggle_creditcard import CreditCard
+from make_classification import MakeClassification
 
 from mnist import MNIST
 
@@ -11,7 +12,8 @@ class DataManager:
           0 : WineData,
           1: LoadDigits,
           2: CreditCard,
-          3: MNIST
+          3: MNIST,
+          4:MakeClassification
 
           # 4 : sqr,
           # 9 : sqr,

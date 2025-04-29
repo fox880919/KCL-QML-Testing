@@ -1,4 +1,0 @@
-
-
-// apply PCA first when rotating angle, because rotating an angle after PCA gives an error
-// last MR is to test PCA when components number is the same as the original (13)

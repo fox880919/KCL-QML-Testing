@@ -1,23 +1,34 @@
 import numpy as np
 
 class DefaultParameters:
-
+    
+    
+    #not used anymore
     useParametersClassParameters = True
 
-    n_folds = 16
+    roundNumber = 1
+
+    inputNumber = 1
+
+    showProgressDetails = True
+
+    n_folds = 15
     # 0 = wine data
     # dataType = 0
     
-    # 2 = mnist
+    # 3 = mnist
     dataType = 0
 
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
     featureMapType = 0
 
+    amplitudeNQubits = 10
+    phasenqubits = 5
+
     alwaysUsePCA = False 
 
     # pca_components = 8
-    pca_components = 8
+    pca_components = 4
 
     applyMRs = True
 
@@ -28,10 +39,10 @@ class DefaultParameters:
     applyScalarValue = False
     scaleValue = 3
 
-    fromScaleValue = 2
+    fromScaleValue = 11
 
     # toScaleValue = 20
-    toScaleValue = 5
+    toScaleValue = 12
     
     applyAngleRotation = False
     angle = 2* np.pi 
@@ -59,7 +70,7 @@ class DefaultParameters:
 
     modelName = 'svm00'
     
-    allDataTypes=['Wine Data', 'Load Digits', 'Credit Card', 'MNIST']
+    allDataTypes=['Wine Data', 'Load Digits', 'Credit Card', 'MNIST', 'Make Classification']
 
     featureMaps=['Amplitude Embedding', 'Angle Embedding', 'Custom Embedding']
 
@@ -67,29 +78,39 @@ class DefaultParameters:
 
     # savingFileName = 'my_dataframe_noisy1.csv'
 
-    savingFileName = 'my_dataframe_all_noise_data1.csv'
+    savingFileName = 'my_dataframe_all_extra_extra_noise_data11.csv'
 
     # savedModelsFolder = 'saved_models'
 
     # savedModelsFolder = 'saved_models_noisy1'
 
-    savedModelsFolder = 'saved_models_all_noise_data1'
+    #first naming
+    # savedModelsFolder = 'saved_models_all_extra_extra_noise_data11'
 
-    applyDepolarizingChannelNoise = True
+    #second naming
+    savedModelsFolder = 'saved_models_all/noise1_95_2_95_3_95_4_95_data_1'
 
-    depolarizingChannelNoise = 0.2
+    useQiskit = False
+
+    applyDepolarizingChannelNoise = False
+
+    depolarizingChannelNoise = 0.95
 
     applyAfterEnganglementNoise = False
 
-    afterEnganglementNoise = 0.2
+    afterEnganglementNoise = 0.95
 
     applyBitFlipNoise = False
 
-    bitFlipNoise = 0.2
+    bitFlipNoise = 0.95
 
-    applyPhaseDumingNoise = False
+    applyAmplitudeDampingNoise = False
+    
+    amplitudeDampingNoise = 0.95
 
-    phaseDumingNoise = 0.2
+    applyPhaseDampingNoise = False
+
+    phaseDampingNoise = 0.65
 
     doOneKfold = False
     
@@ -99,7 +120,7 @@ class DefaultParameters:
 
     onlyScalarValue = 3
 
-    usePercentageOfData = True
+    usePercentageOfData = False
 
     PercentageOfData = 0.002
     

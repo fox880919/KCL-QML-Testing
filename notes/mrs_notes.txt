@@ -1,0 +1,20 @@
+
+
+// apply PCA first when rotating angle, because rotating an angle after PCA gives an error
+// last MR is to test PCA when components number is the same as the original (13)
+
+
+// all noise (0.2)
+
+// all extra noise (0.6)
+
+
+
+Load Digits (~1800 samples) (64 dimensions/features)
+(Kaggle) Credit Card (~284,000 samples) ) (30 dimensions/features)
+MNIST (~ 70,000 samples) ) (784 dimensions/features)
+
+
+naming for saved_models
+
+noise_{type}_{percentage}_data{type}

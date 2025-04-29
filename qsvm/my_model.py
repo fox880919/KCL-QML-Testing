@@ -6,8 +6,8 @@ from classes.my_joblib import MyJoblib
 
 from classes.my_dill import MyDill
 
-
 from classes.parameters import MyParameters
+
 class MyModel:
 
     myJoblib = MyJoblib()
@@ -24,7 +24,13 @@ class MyModel:
 
         print('training model started')
 
-        svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+        if MyParameters.showProgressDetails:
+            # svm = SVC(kernel = getQKernel, verbose= True).fit(input_tr, output_tr)
+            svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+
+
+        else:
+            svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
 
         print('training model ended')
 
@@ -34,7 +40,12 @@ class MyModel:
 
         print('saving model started')
 
+        savingModelName = MyParameters.getSavingModelFolderName()
+        #models naming 1
         MyModel.saveModel(SVC, f'{MyParameters.savedModelsFolder}/{modelName}')  
+
+        #models naming 2
+        MyModel.saveModel(SVC, f'{savingModelName}/{modelName}')  
 
         print('saving model ended')
 
@@ -102,3 +113,6 @@ class MyModel:
         returnedModel = MyModel.myDill.loadModelFromFile(fileName)
 
         return returnedModel
+    
+
+    

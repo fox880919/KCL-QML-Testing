@@ -10,6 +10,8 @@ from sklearn.metrics import accuracy_score
 
 from my_feature_map import MyFeatureMap
 
+from classes.parameters import MyParameters
+
 from my_model import MyModel
 
 class MyKernel:
@@ -55,6 +57,16 @@ class MyKernel:
 
     def getQKernel(self, A, B):
 
+        print(f'getQKernel, len(A): {len(A)}')
+
+        print(f'getQKernel, len(A[0]): {len(A[0])}')
+
+        # print(f"Evaluating kernel between: {A} and {B}")
+        MyParameters.inputNumber = 1
+        
+        if MyParameters.showProgressDetails:
+            print(f'QKernel roundNumber: {MyParameters.roundNumber}')
+            # print(f'len(A): {len(A)}, and len(B): {len(B)}')
         # print('2- MyKernel.np: ', self.np)
         return self.np.array([[self.mySelectedFeatureMap(a, b)[0] for b in B] for a in A])
 

@@ -95,5 +95,11 @@ def start():
 
         #         loopThroughParametersForMRs(i, j)
 
-start()
+
+# print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
+
+# modelName = 'svm00'
+# print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
+
+# start()
 

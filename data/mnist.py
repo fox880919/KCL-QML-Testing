@@ -3,6 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MaxAbsScaler 
 from sklearn.model_selection import KFold
 
+from sklearn.model_selection import StratifiedKFold
+
 from sklearn.datasets import fetch_openml
 
 from classes.parameters import MyParameters
@@ -54,21 +56,34 @@ class MNIST:
         x = fashion_mnist.data.astype('float32') / 255.0
         y = fashion_mnist.target.astype('int')
 
+        print(f'mnist len(x) -- 1: {len(x)}')
+
         if MyParameters.usePercentageOfData == True:
 
         # ⬇️ Take only 1% of the data (700 samples)
             x, _, y, _ = train_test_split(x, y, train_size= MyParameters.PercentageOfData, stratify=y, random_state=seed)
+
+        print(f'mnist len(x) -- 2: {len(x)}')
 
 
         scaler = MaxAbsScaler()
         x = scaler.fit_transform(x)
         x = np.clip(x, 0, 1)  # Clip values to [0, 1]
 
+        print(f'mnist len(x) -- 3: {len(x)}')
+
 
         n_folds = MyParameters.n_folds
 
         kf = KFold(n_splits=n_folds, shuffle=True, random_state=seed)
-        
+
+        # print(f'mnist len(kf) -- 1: {len(kf)}')
+        # print(f'mnist len(kf[0]) -- 1: {len(kf[0])}')
+        # print(f'mnist len(kf[0][0]) -- 1: {len(kf[0][0])}')
+
+        # kf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=seed)
+
+        StratifiedKFold
         train_data_list = []
         test_data_list = []        
         for train_index, test_index in kf.split(x):
@@ -80,6 +95,9 @@ class MNIST:
             train_data_list.append((x_tr, y_tr))
             test_data_list.append((x_test, y_test))
 
+
+        # print(f'mnist len(train_data_list) -- 3: {len(train_data_list)}')
+            
         return np, train_data_list, test_data_list
 
 

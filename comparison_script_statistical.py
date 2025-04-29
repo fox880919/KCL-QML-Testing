@@ -48,7 +48,8 @@ def getAllScores():
             if mrNumber == 1:
                 
                 # for mrValue in range(2, 20):
-                for mrValue in range(2, 5):
+                # for mrValue in range(2, 5):
+                for mrValue in range(2, 3):
 
                     temp = myDataFrame.getModelScoreValue(mrNumber, mrValue, kfoldIndex, nfoldIndex)
                     mrsAccuracyScores = mrsAccuracyScores + temp

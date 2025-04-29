@@ -43,6 +43,7 @@ class WineData:
         x = scaler.fit_transform(x)
         x = np.clip(x, 0, 1)  # Clip values to [0, 1]
 
+        print(f'wine data, len(x): {len(x)}')
 
         n_folds = MyParameters.n_folds
 

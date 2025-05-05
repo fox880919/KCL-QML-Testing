@@ -101,5 +101,5 @@ def start():
 # modelName = 'svm00'
 # print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
 
-# start()
+start()
 

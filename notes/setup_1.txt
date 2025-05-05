@@ -10,7 +10,7 @@ mandatory †ø install
 
 5- pip3 install seaborn
 
-// 1-5 => pip3 install numpy matplotlib seaborn
+// 1-5 => pip3 install qiskit numpy matplotlib seaborn
 
 ======
 

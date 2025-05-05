@@ -10,7 +10,7 @@ mandatory †ø install
 
 5- pip3 install qiskit-ibm-provider
 
-6- pip3 install qiskit-ibm-runtime
+6- pip3 install  
 
 7- pip install hypothesis (not pip3 install hypothesis)
 
@@ -33,6 +33,7 @@ mandatory †ø install
 
 // pip3 install pennylane-qiskit
 
+// pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-provider qiskit-ibm-runtime joblib pickle dill plotly pennylane-qiskit
 
 
 

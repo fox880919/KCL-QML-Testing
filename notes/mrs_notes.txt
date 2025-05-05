@@ -18,3 +18,7 @@ MNIST (~ 70,000 samples) ) (784 dimensions/features)
 naming for saved_models
 
 noise_{type}_{percentage}_data{type}
+
+for git:
+
+- git pull origin

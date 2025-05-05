@@ -109,7 +109,7 @@ class MyFeatureMap:
         b, wires=range(MyFeatureMap.nqubits), pad_with=0, normalize=True))
 
         ## or manual noise 2
-        if MyParameters.applyPhaseDumpingNoise == True:
+        if MyParameters.applyPhaseDampingNoise == True:
             for wire in range(MyFeatureMap.amplitudeNQubits):
                 qml.BitFlip(MyParameters.bitFlipNoise, wires=wire) 
 

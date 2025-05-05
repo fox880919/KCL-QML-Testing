@@ -39,6 +39,12 @@ class LoadDigits:
 
         x,y = load_digits(return_X_y = True)
 
+        if MyParameters.usePercentageOfData == True:
+
+            print('in getPercentageOfData')
+        # ⬇️ Take only 1% of the data (700 samples)
+            x, _, y, _ = train_test_split(x, y, train_size= MyParameters.PercentageOfData, stratify=y, random_state=seed)
+
         scaler = MaxAbsScaler()
         x = scaler.fit_transform(x)
         x = np.clip(x, 0, 1)  # Clip values to [0, 1]

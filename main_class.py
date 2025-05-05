@@ -295,9 +295,11 @@ class MyMain():
         np, train_data_list, test_data_list = MyMain.getListOfFoldData()
 
         print('kfolds = len(train_data_list) = ', len(train_data_list))
-        # print('len(train_data_list[0]) = ', len(train_data_list[0]))
+        # print('types of datea = len(train_data_list[0]) = ', len(train_data_list[0]))
 
         print('inputs per kfold = len(train_data_list[0][0]) = ', len(train_data_list[0][0]))
+
+        # print('inputs per kfold = len(train_data_list[1][0]) = ', len(train_data_list[1][0]))
 
         print('input dimensions len(train_data_list[0][0][0]) = ', len(train_data_list[0][0][0]))
 

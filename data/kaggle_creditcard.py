@@ -26,7 +26,8 @@ class CreditCard:
         y = data["Class"].values
 
         if MyParameters.usePercentageOfData == True:
-        
+            
+            # print('in getPercentageOfData')
         # Get only 1% of the data (700 samples)
             x_small, _, y_small, _ = train_test_split(x, y, train_size= MyParameters.PercentageOfData, stratify=y, random_state=42)
 
@@ -52,6 +53,8 @@ class CreditCard:
     
     def prepareNFoldData(self):
         
+        print('in kaggle_creditcard')
+
         seed = 1234
 
         np.random.seed(seed)
@@ -67,8 +70,9 @@ class CreditCard:
         x = data.drop(columns=["Class"]).values
         y = data["Class"].values
 
-
         if MyParameters.usePercentageOfData == True:
+
+            # print('in getPercentageOfData')
 
         # ⬇️ Take only 1% of the data (700 samples)
             x, _, y, _ = train_test_split(x, y, train_size= MyParameters.PercentageOfData, stratify=y, random_state=seed)

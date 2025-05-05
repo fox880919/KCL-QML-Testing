@@ -57,9 +57,9 @@ class MyKernel:
 
     def getQKernel(self, A, B):
 
-        print(f'getQKernel, len(A): {len(A)}')
+        print(f'getQKernel, (number of samples) len(A): {len(A)}')
 
-        print(f'getQKernel, len(A[0]): {len(A[0])}')
+        # print(f'getQKernel, (number of demensions) len(A[0]): {len(A[0])}')
 
         # print(f"Evaluating kernel between: {A} and {B}")
         MyParameters.inputNumber = 1

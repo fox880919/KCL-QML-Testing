@@ -16,7 +16,7 @@ class DefaultParameters:
     # 0 = wine data 1 = load digits 2 = credit card 3 = mnist 4= custom
     # dataType = 0
     
-    dataType = 1
+    dataType = 0
 
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
     featureMapType = 0
@@ -91,7 +91,7 @@ class DefaultParameters:
 
     useQiskit = False
 
-    applyDepolarizingChannelNoise = True
+    applyDepolarizingChannelNoise = False
 
     depolarizingChannelNoise = 0.5
 
@@ -119,7 +119,7 @@ class DefaultParameters:
 
     onlyScalarValue = 3
 
-    usePercentageOfData = True
+    usePercentageOfData = False
 
     PercentageOfData = 0.1
     

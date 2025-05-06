@@ -13,6 +13,8 @@ sys.path.insert(4, './metamorphic')
 
 from classes.parameters import MyParameters
 
+from classes.default_parameters import DefaultParameters
+
 from classes.read_user_input import ReadUserInput
 
 from data.data_manager import DataManager
@@ -53,7 +55,19 @@ def loopThroughParametersForMRs(mrNumber, value):
 
     myMain.useMR(mrNumber, value)
 
+def adjustParameters():
 
+    print(f'1- MyParameters.bitFlipNoise: {DefaultParameters.bitFlipNoise}')
+
+    print(f'1- MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
+
+    DefaultParameters.bitFlipNoise = 0.1
+
+    print(f'2- MyParameters.bitFlipNoise: {DefaultParameters.bitFlipNoise}')
+
+    MyParameters.resetParameters()
+
+    print(f'1- MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
 
 def start():
     for i in range(0, 6):
@@ -100,6 +114,8 @@ def start():
 
 # modelName = 'svm00'
 # print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
+
+# adjustParameters()
 
 start()
 

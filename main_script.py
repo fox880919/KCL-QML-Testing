@@ -110,12 +110,12 @@ def start():
         #         loopThroughParametersForMRs(i, j)
 
 
-# print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
+print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
 
 # modelName = 'svm00'
 # print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
 
 # adjustParameters()
 
-start()
+# start()
 

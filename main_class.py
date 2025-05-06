@@ -313,8 +313,8 @@ class MyMain():
 
             time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            if fold_index != 0:
-                continue
+            # if fold_index != 0:
+            #     continue
 
             print(f'starttime of kfold({fold_index}): {time}')
             

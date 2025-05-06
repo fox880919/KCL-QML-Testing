@@ -24,7 +24,7 @@ class DefaultParameters:
     amplitudeNQubits = 10
     phasenqubits = 5
 
-    alwaysUsePCA = True 
+    alwaysUsePCA = False 
 
     # pca_components = 8
     pca_components = 8

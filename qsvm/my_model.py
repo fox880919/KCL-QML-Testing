@@ -42,7 +42,7 @@ class MyModel:
 
         savingModelName = MyParameters.getSavingModelFolderName()
         #models naming 1
-        MyModel.saveModel(SVC, f'{MyParameters.savedModelsFolder}/{modelName}')  
+        # MyModel.saveModel(SVC, f'{MyParameters.savedModelsFolder}/{modelName}')  
 
         #models naming 2
         MyModel.saveModel(SVC, f'{savingModelName}/{modelName}')  

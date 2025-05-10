@@ -110,12 +110,23 @@ def start():
         #         loopThroughParametersForMRs(i, j)
 
 
-print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
+
+# print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
+
+# import os
+# current_directory = os.getcwd()  # Get the current working directory
+# target_folder = os.path.join(current_directory, 'saved_data')
+# print(f'savingModelFolderName: {os.path.join(target_folder, MyParameters.getSavingFileName())}')
+
+
+# print(f'savingFileName: {MyParameters.getSavingFileName()}')
+
+# print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
 
 # modelName = 'svm00'
 # print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
 
 # adjustParameters()
 
-# start()
+start()
 

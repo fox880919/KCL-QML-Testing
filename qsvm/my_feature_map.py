@@ -90,7 +90,7 @@ class MyFeatureMap:
 
         if MyParameters.showProgressDetails:
             # print(f'amplitude embedding roundNumber: {MyParameters.roundNumber}')
-            print(f'amplitude embedding inputNumber: {MyParameters.inputNumber}')
+            print(f'amplitude embedding inputNumber: {MyParameters.inputNumber}', end='\r')
 
             # print(f'len(A): {len(a)}, and len(B): {len(b)}')
         

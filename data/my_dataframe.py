@@ -102,7 +102,10 @@ class MyDataFrame:
          # Construct the target folder path
         # print('target_folder: ', target_folder)
 
-        file_path = os.path.join(target_folder, MyParameters.savingFileName)
+        savingFileName = MyParameters.getSavingFileName()
+        
+        # file_path = os.path.join(target_folder, MyParameters.savingFileName)
+        file_path = os.path.join(target_folder, MyParameters.getSavingFileName())
 
         # print('file_path is:', file_path)
 

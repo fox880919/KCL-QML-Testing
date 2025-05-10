@@ -145,6 +145,32 @@ class MyParameters:
 
         return f'{MyParameters.getSavingModelFolderName()}/{modelName}'
     
+    def getSavingFileName():
+
+        # return MyParameters.savingFileName
+    
+        original = 'my_dataframe_'
+
+        noise0 = 'noise' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'no_noise_'
+
+        noise1 = f'_1_{MyParameters.depolarizingChannelNoise}_' if MyParameters.applyDepolarizingChannelNoise else ''
+
+        noise2 = f'2_{MyParameters.afterEnganglementNoise}_' if MyParameters.applyAfterEnganglementNoise else ''
+
+        noise3 = f'3_{MyParameters.bitFlipNoise}_' if MyParameters.applyBitFlipNoise else ''
+
+        noise4 = f'4_{MyParameters.amplitudeDampingNoise}_' if MyParameters.applyAmplitudeDampingNoise else ''
+
+        noise5 = f'_5_{MyParameters.phaseDampingNoise}_' if MyParameters.applyPhaseDampingNoise else ''
+    
+        data = f'data{MyParameters.dataType}'
+
+        savingFileName = f'{original}{noise0}{noise1}{noise2}{noise3}{noise4}{noise5}{data}' 
+
+        return savingFileName
+    
+
+    
     def getDevice():
 
         deviceType = 'default.mixed' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'lightning.qubit'
@@ -161,17 +187,18 @@ class MyParameters:
 
         noise0 = 'noise' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'no_noise_'
 
-        noise1 = f'_1_{MyParameters.depolarizingChannelNoise}' if MyParameters.applyDepolarizingChannelNoise else ''
+        noise1 = f'_1_{MyParameters.depolarizingChannelNoise}_' if MyParameters.applyDepolarizingChannelNoise else ''
 
-        noise2 = f'_2_{MyParameters.afterEnganglementNoise}' if MyParameters.applyAfterEnganglementNoise else ''
+        noise2 = f'2_{MyParameters.afterEnganglementNoise}_' if MyParameters.applyAfterEnganglementNoise else ''
 
-        noise3 = f'_3_{MyParameters.bitFlipNoise}' if MyParameters.applyBitFlipNoise else ''
+        noise3 = f'3_{MyParameters.bitFlipNoise}_' if MyParameters.applyBitFlipNoise else ''
 
-        noise4 = f'_4_{MyParameters.amplitudeDampingNoise}' if MyParameters.applyAmplitudeDampingNoise else ''
+        noise4 = f'4_{MyParameters.amplitudeDampingNoise}_' if MyParameters.applyAmplitudeDampingNoise else ''
 
         noise5 = f'_5_{MyParameters.phaseDampingNoise}_' if MyParameters.applyPhaseDampingNoise else ''
-
+    
         data = f'data{MyParameters.dataType}'
+
 
         return f'saved_models_all/{qiskit}{noise0}{noise1}{noise2}{noise3}{noise4}{noise5}{data}'
     

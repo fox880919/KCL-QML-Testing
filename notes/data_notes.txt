@@ -1,0 +1,6 @@
+
+
+Wine Data (`178) ((13 dimensions/features))
+Load Digits (~1800 samples) (64 dimensions/features)
+(Kaggle) Credit Card (~284,000 samples) ) (30 dimensions/features)
+MNIST (~ 70,000 samples) ) (784 dimensions/features)

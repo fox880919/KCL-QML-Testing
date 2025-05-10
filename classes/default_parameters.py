@@ -124,7 +124,7 @@ class DefaultParameters:
 
     onlyScalarValue = 3
 
-    usePercentageOfData = False
+    usePercentageOfData = True
 
     PercentageOfData = 0.1
     

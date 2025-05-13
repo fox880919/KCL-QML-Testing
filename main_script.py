@@ -10,6 +10,8 @@ sys.path.insert(4, './metamorphic')
 
 # from hypothesis import given, strategies as st
 
+from qiskit_ibm_runtime import QiskitRuntimeService, Options
+
 
 from classes.parameters import MyParameters
 
@@ -127,6 +129,9 @@ def start():
 # print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
 
 # adjustParameters()
+
+backend = {}
+
 
 start()
 

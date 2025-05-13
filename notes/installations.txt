@@ -1,0 +1,23 @@
+pip3 install qiskit==0.46.3 \
+            qiskit-terra==0.46.3 \
+            qiskit-aer==0.13.0 \
+            qiskit-ibmq-provider==0.19.0 \
+            qiskit-ignis==0.7.0 \
+            qiskit-aqua==0.9.5
+
+pip3 install qiskit==1.2.0 \
+            qiskit-ibmq-provider==0.19.0 \
+            pennylane-qiskit==0.41.0
+
+
+pip3 uninstall qiskit qiskit-terra qiskit-aer qiskit-ibmq-provider qiskit-ignis qiskit-aqua pennylane-qiskit -y
+
+
+python3 -m venv qiskit_env
+source qiskit_env/bin/activate
+pip3 install scikit-learn 
+pip3 install pandas     
+pip3 install pennylane-cirq   
+
+deactivate
+rm -rf qiskit_env

@@ -1,5 +1,7 @@
 import pennylane as qml
 
+import pennylane_qiskit
+
 from data.wine_data import WineData as MyData
 
 from sklearn.decomposition import PCA
@@ -83,7 +85,20 @@ class MyFeatureMap:
     # @qml.qnode(qml.device("lightning.qubit", wires = amplitudeNQubits))
     #for noise use default.mixed
     # @qml.qnode(qml.device("default.mixed", wires = amplitudeNQubits))
-    @qml.qnode(qml.device(MyParameters.getDevice(), wires = amplitudeNQubits))
+    # @qml.qnode(qml.device(MyParameters.getDeviceType(), wires = amplitudeNQubits))
+    @qml.qnode(MyParameters.getDevice())
+    # @qml.qnode(qml.device("qiskit.ibmq", wires=MyParameters.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024))
+
+    # def __getAmplitudeEmdedding(a, b):
+
+    #     qml.AmplitudeEmbedding(
+    #     a, wires=range(5), pad_with=0, normalize=True)
+
+    #     qml.adjoint(qml.AmplitudeEmbedding(
+    #     b, wires=range(5), pad_with=0, normalize=True))
+
+    #     return qml.probs(wires = range(5))
+
     def __getAmplitudeEmdedding(a, b):
         
         # print(f'amplitudeNQubits {MyFeatureMap.amplitudeNQubits}')
@@ -128,7 +143,8 @@ class MyFeatureMap:
         MyFeatureMap.xs_test = pca.transform(MyFeatureMap.x_test)
 
     # @qml.qnode(qml.device("lightning.qubit", wires = MyParameters.pca_components))
-    @qml.qnode(qml.device(MyParameters.getDevice(), wires = MyParameters.pca_components))
+    # @qml.qnode(qml.device(MyParameters.getDeviceType(), wires = MyParameters.pca_components))
+    @qml.qnode(MyParameters.getDevice())    
     def __getAngleEmdedding(a, b):
 
         qml.AngleEmbedding(a, wires=range(MyFeatureMap.nqubits)) 
@@ -137,7 +153,8 @@ class MyFeatureMap:
 
     # @qml.qnode(dev)
     # @qml.qnode(qml.device("lightning.qubit", wires = 4))
-    @qml.qnode(qml.device(MyParameters.getDevice(), wires = 4))
+    # @qml.qnode(qml.device(MyParameters.getDeviceType(), wires = 4))
+    @qml.qnode(MyParameters.getDevice())    
     def __getCustomEmdedding(a, b):
 
         MyFeatureMap.ZZFeatureMap(MyFeatureMap.nqubits, a)
@@ -156,6 +173,19 @@ class MyFeatureMap:
             qml.RZ(2.0 * (MyFeatureMap.np.pi - data[q0]) *
                 (MyFeatureMap.np.pi - data[q1]), wires = q1)
             qml.CZ(wires = [q0, q1])
+    
+    def getDevice():
+
+        dev = qml.device(MyParameters.getDevice(), wires = MyFeatureMap.amplitudeNQubits)
+
+        if MyParameters.useIBMBackEndService == True:
+
+            print(f'')
+            dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
+
+
+        return dev
+
     
     # def startSVC(self, input_tr, input_test, output_tr, output_test):
 

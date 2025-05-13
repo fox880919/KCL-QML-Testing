@@ -1,10 +1,21 @@
 import numpy as np
 
+import pennylane as qml
+
+import pennylane_qiskit
+
+from qiskit_ibm_runtime import QiskitRuntimeService
+
+
 # from default_parameters import DefaultParameters
 
 from classes.default_parameters import DefaultParameters 
 
-class MyParameters:
+class MyParameters: 
+
+    backend = {}
+    ####
+    useIBMBackEndService = DefaultParameters.useIBMBackEndService
 
     useParametersClassParameters = DefaultParameters.useParametersClassParameters
 
@@ -169,11 +180,59 @@ class MyParameters:
 
         return savingFileName
     
+    def initiateBackend():
+    
+        print('calling backend')
+        service = QiskitRuntimeService()
 
+        backend = service.backend(
+            "ibm_brisbane"
+        )
+        MyParameters.backend = backend
+
+        print(f'backend is: {MyParameters.backend}')
     
     def getDevice():
 
-        deviceType = 'default.mixed' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'lightning.qubit'
+        if MyParameters.useIBMBackEndService:
+
+            # print(f'from feature map type: {featureMapType}')
+            if MyParameters.backend == {}:
+                MyParameters.initiateBackend()
+            else:
+                print(f'already initiated backend: {MyParameters.backend}')
+            # dev = qml.device(MyParameters.getDeviceType(),
+            #     backend = MyParameters.backend, wires = 5)
+
+            dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits, backend=MyParameters.backend, shots=1024)
+
+        else:
+
+            dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits)
+
+        # if MyParameters.useIBMBackEndService == True:
+
+            # dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
+            # dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits, backend='brisbane', shots=1024)
+
+        # print(f'in MyParamaeters.getDevice with MyParameters.useIBMBackEndService = {MyParameters.useIBMBackEndService}')
+
+        print(f'in MyParamaeters.getDevice with dev = {dev}')
+
+        return dev
+    
+    def getDeviceType():
+
+        deviceType = 'lightning.qubit'
+
+        if MyParameters.useIBMBackEndService == True:
+
+            # deviceType = "qiskit.ibmq"
+            # deviceType = "qiskit.ibm"
+            deviceType = "qiskit.remote"
+
+        else:    
+            deviceType = 'default.mixed' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'lightning.qubit'
 
         print(f'device type: {deviceType}')
         
@@ -205,8 +264,11 @@ class MyParameters:
 
     def resetParameters():
 
+        
         defaultParameters = DefaultParameters()
 
+        MyParameters.useIBMBackEndService = DefaultParameters.useIBMBackEndService
+        
         MyParameters.useParametersClassParameters = defaultParameters.useParametersClassParameters
 
         MyParameters.roundNumber = defaultParameters.roundNumber + 1

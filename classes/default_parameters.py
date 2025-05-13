@@ -2,7 +2,8 @@ import numpy as np
 
 class DefaultParameters:
     
-    
+    useIBMBackEndService = False
+
     #not used anymore
     useParametersClassParameters = True
 
@@ -21,7 +22,7 @@ class DefaultParameters:
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
     featureMapType = 0
 
-    amplitudeNQubits = 10
+    amplitudeNQubits = 5
     phasenqubits = 5
 
     alwaysUsePCA = True 
@@ -92,7 +93,7 @@ class DefaultParameters:
     useQiskit = False
 
     #noise 1
-    applyDepolarizingChannelNoise = True
+    applyDepolarizingChannelNoise = False
 
     depolarizingChannelNoise = 0.5
 
@@ -102,7 +103,7 @@ class DefaultParameters:
     afterEnganglementNoise = 0.5
 
     #noise 3
-    applyBitFlipNoise = True
+    applyBitFlipNoise = False
 
     bitFlipNoise = 0.5
 

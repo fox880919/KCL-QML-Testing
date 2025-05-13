@@ -1,0 +1,7 @@
+qiskit=1.4.2
+qiskit-ibm-runtime==0.38
+pennylane==0.32
+
+pennylane-cirq==0.31.0
+
+pennylane_qiskit==0.41.0

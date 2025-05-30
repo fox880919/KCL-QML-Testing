@@ -2,7 +2,7 @@ import numpy as np
 
 class DefaultParameters:
     
-    useIBMBackEndService = False
+    useIBMBackEndService = True
 
     #not used anymore
     useParametersClassParameters = True
@@ -14,6 +14,7 @@ class DefaultParameters:
     showProgressDetails = True
 
     n_folds = 15
+    # n_folds = 15
     # 0 = wine data, 1 = load digits, 2 = credit card. 3 = mnist, 4= custom
     # dataType = 0
     
@@ -23,6 +24,7 @@ class DefaultParameters:
     featureMapType = 0
 
     amplitudeNQubits = 5
+    angleNQubits = 8
     phasenqubits = 5
 
     alwaysUsePCA = True 
@@ -93,7 +95,7 @@ class DefaultParameters:
     useQiskit = False
 
     #noise 1
-    applyDepolarizingChannelNoise = False
+    applyDepolarizingChannelNoise = True
 
     depolarizingChannelNoise = 0.5
 
@@ -105,7 +107,8 @@ class DefaultParameters:
     #noise 3
     applyBitFlipNoise = False
 
-    bitFlipNoise = 0.5
+    bitFlipNoise = 0.9
+    # bitFlipNoise = 0.5
 
     #noise 4
     applyAmplitudeDampingNoise = False

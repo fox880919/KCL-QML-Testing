@@ -87,13 +87,15 @@ def start():
         if i == 1:
 
             for j in range(MyParameters.fromScaleValue, MyParameters.toScaleValue):
-            # for j in range(4, 20):
+        #     # for j in range(4, 20):
 
                 loopThroughParametersForMRs(i, j)
 
         # if i == 2:
 
-        #     for j in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
+        #     # for j in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
+
+        #     for j in [0.5, 0.9]:
 
         #         loopThroughParametersForMRs(i, j)
 
@@ -105,11 +107,12 @@ def start():
 
         #     loopThroughParametersForMRs(i, 0)
 
-        # if i == 5:
+        if i == 5:
 
-        #     for j in [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]:
+            # for j in [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]:
+            for j in [ 10, 20]:
 
-        #         loopThroughParametersForMRs(i, j)
+                loopThroughParametersForMRs(i, j)
 
 
 
@@ -121,9 +124,9 @@ def start():
 # print(f'savingModelFolderName: {os.path.join(target_folder, MyParameters.getSavingFileName())}')
 
 
-# print(f'savingFileName: {MyParameters.getSavingFileName()}')
+print(f'savingFileName: {MyParameters.getSavingFileName()}')
 
-# print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
+print(f'savingModelFolderName: {MyParameters.getSavingModelFolderName()}')
 
 # modelName = 'svm00'
 # print(f'getSavingModelFolder: {MyParameters.getFullPathModelName(modelName)}')
@@ -132,6 +135,10 @@ def start():
 
 backend = {}
 
+print(f'getDevice(): {MyParameters.getDevice()}')
 
-start()
+print(f'getDeviceType(): {MyParameters.getDeviceType()}')
 
+print(f'MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
+
+# start()

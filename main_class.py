@@ -88,7 +88,7 @@ class MyMain():
         print(f'featureMapType: {featureMapType}')
         if featureMapType == 1:
 
-            print('in featureMapType == 1')
+            # print('in featureMapType == 1')
 
             # return x_tr, x_test
             defaultNumber = MyParameters.pca_components
@@ -157,7 +157,13 @@ class MyMain():
 
         #1
         if MyParameters.applyScalarValue:
+
+            print('before modification: ', x_tr[0])
+
             x_tr, x_test = MyMain.myMetamorphicTesting.scaleInputData(x_tr, x_test, MyParameters.scaleValue)
+
+            print('after modification: ', x_tr[0])
+
             # print('scaled x_tr and x_test by:', MyParameters.scaleValue)
     
         #2
@@ -330,8 +336,10 @@ class MyMain():
             x_test, y_test = test_data_list[fold_index]
 
             print('fold_index: ', fold_index)
+
             # return
             x_tr, x_test, y_tr, y_test = MyMain.dataModification(x_tr, x_test, y_tr, y_test)
+
 
             # modelName = 'SVM'+ str(0) + str(mrNumber)+ '-' + str(mrValue) + '-' + str(fold_index) + '-of-' + str(MyParameters.n_folds)
 

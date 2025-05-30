@@ -37,6 +37,8 @@ class MyParameters:
     featureMapType = DefaultParameters.featureMapType
 
     amplitudeNQubits = DefaultParameters.amplitudeNQubits
+    angleNQubits = DefaultParameters.angleNQubits
+
     phasenqubits = DefaultParameters.phasenqubits
 
     alwaysUsePCA = DefaultParameters.alwaysUsePCA 
@@ -208,8 +210,16 @@ class MyParameters:
 
         else:
 
+            print(f'get device, dont use IBM backend')
+
             dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits)
 
+            if MyParameters.featureMapType == 1:
+
+             print(f'get device, MyParameters.featureMapType == 1')
+             dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.angleNQubits)
+
+        
         # if MyParameters.useIBMBackEndService == True:
 
             # dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
@@ -288,6 +298,9 @@ class MyParameters:
         MyParameters.featureMapType = defaultParameters.featureMapType
 
         MyParameters.amplitudeNQubits = DefaultParameters.amplitudeNQubits
+
+        MyParameters.angleNQubits = DefaultParameters.angleNQubits
+
         MyParameters.phasenqubits = DefaultParameters.phasenqubits
         
         MyParameters.alwaysUsePCA = defaultParameters.alwaysUsePCA

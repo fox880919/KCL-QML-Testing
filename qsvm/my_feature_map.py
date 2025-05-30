@@ -58,6 +58,7 @@ class MyFeatureMap:
 
         elif(type == 1):
 
+            print(f'in type == 1')
             # print('getting angle embedding')
             MyFeatureMap.nqubits = components
 
@@ -116,6 +117,8 @@ class MyFeatureMap:
 
         ## or manual noise 1
         if MyParameters.applyDepolarizingChannelNoise == True:
+
+            # print(f'MyParameters.applyDepolarizingChannelNoise: {MyParameters.applyDepolarizingChannelNoise}')
             for wire in range(MyFeatureMap.amplitudeNQubits):
                 qml.DepolarizingChannel(MyParameters.depolarizingChannelNoise, wires=wire) 
 
@@ -147,6 +150,7 @@ class MyFeatureMap:
     @qml.qnode(MyParameters.getDevice())    
     def __getAngleEmdedding(a, b):
 
+        print(f'angle embedding inputNumber: {MyParameters.inputNumber}', end='\r')
         qml.AngleEmbedding(a, wires=range(MyFeatureMap.nqubits)) 
         qml.adjoint(qml.AngleEmbedding(b, wires=range(MyFeatureMap.nqubits))) 
         return qml.probs(wires = range(MyFeatureMap.nqubits))
@@ -180,7 +184,7 @@ class MyFeatureMap:
 
         if MyParameters.useIBMBackEndService == True:
 
-            print(f'')
+            # print(f'')
             dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
 
 

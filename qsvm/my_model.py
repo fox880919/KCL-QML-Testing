@@ -79,7 +79,7 @@ class MyModel:
     def predictAll(self, svmModel, input_test):
 
         # Check the type of the loaded object
-        print(f"Type of loaded object: {type(svmModel)}")
+        # print(f"Type of loaded object: {type(svmModel)}")
 
         # If it's a class, you need to instantiate it and train it
         if isinstance(svmModel, type):

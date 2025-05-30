@@ -1,0 +1,24 @@
+
+
+savingFileName: my_dataframe_noise_1_0.5_data1
+savingModelFolderName: saved_models_all/noise_1_0.5_data1
+
+
+starting round of 0 and value 0
+no change
+default dataType is:  1
+DataManager.options[type]: <class 'load_digits.LoadDigits'>
+in getPercentageOfData
+kfolds = len(train_data_list) =  15
+inputs per kfold = len(train_data_list[0][0]) =  167
+input dimensions len(train_data_list[0][0][0]) =  64
+starttime of kfold(0): 2025-05-20 00:39:10
+fold_index:  0
+before pca, len(x_tr[0]):  64
+featureMapType: 0
+after pca len(x_tr[0]:  8
+modelName is:  SVM00-0-0-of-15
+dateAndTime:  2025-05-20 00:39:10
+startTime: 2025-05-20 00:39:10
+training model started
+getQKernel, (number of samples) len(A): 167

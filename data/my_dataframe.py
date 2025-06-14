@@ -13,7 +13,10 @@ class MyDataFrame:
         formattedData = {
                 # 'Feature_Map': [MyParameters.featureMaps[usedParameters['featureMapType']]], 
                 # 'Data_Type':[MyParameters.allDataTypes[usedParameters['dataType']]], 
-                'Feature_Map': [MyParameters.featureMaps[MyParameters.featureMapType]], 
+                'Feature_Map': [MyParameters.featureMaps[MyParameters.featureMapType]],
+
+                'Data_Type_index':[MyParameters.dataType],                 
+
                 'Data_Type':[MyParameters.allDataTypes[MyParameters.dataType]],                 
                 'PCA_Components': [MyParameters.pca_components],
                 'Accuracy_Score': [accuracyScore],
@@ -31,7 +34,32 @@ class MyDataFrame:
                 'Modify_Circuit_Depth': [MyParameters.modifyCircuitDepth],
                 'adding_Additional_Feature': [MyParameters.addAdditionalFeature],
                 'Adding_Additional_Data_Point': [MyParameters.addAdditionalInputsAndOutputs],
+
+                'Is_Noise_Used': ['yes' if MyParameters.isNoiseUsed() else 'no'
+],
+                'Apply_Depolarizing_Channel_Noise': [MyParameters.applyDepolarizingChannelNoise],
+                'Depolarizing_Channel_Noise': [MyParameters.depolarizingChannelNoise if MyParameters.applyDepolarizingChannelNoise else 0],
+
+                'Apply_AfterEnganglement_Noise': [MyParameters.applyAfterEnganglementNoise],
+                'After_Enganglement_Noise': [MyParameters.afterEnganglementNoise if MyParameters.applyAfterEnganglementNoise else 0],
+
+                'Apply_Bit_Flip_Noise': [MyParameters.applyBitFlipNoise],
+                'Bit_Flip_Noise': [MyParameters.bitFlipNoise if MyParameters.applyBitFlipNoise else 0],
                 
+                'Apply_Phase_Damping_Noise': [MyParameters.applyPhaseDampingNoise],
+                'Phase_Damping_Noise': [MyParameters.phaseDampingNoise if MyParameters.applyPhaseDampingNoise else 0],
+
+                'Apply_Amplitude_Damping_Noise': [MyParameters.applyAmplitudeDampingNoise],
+                'Amplitude_Damping_Noise': [MyParameters.amplitudeDampingNoise if MyParameters.applyAmplitudeDampingNoise else 0],
+
+                'Apply_Phase_Damping_Noise': [MyParameters.applyPhaseDampingNoise],
+                'Phase_Damping_Noise': [MyParameters.phaseDampingNoise if MyParameters.applyPhaseDampingNoise else 0],
+
+                'Use_Percentage_Of_Data': [MyParameters.usePercentageOfData],
+                'Percentage_Of_Data': [MyParameters.PercentageOfData if MyParameters.usePercentageOfData else 1],
+
+                'Use_IBM_BackEnd_Service': [MyParameters.useIBMBackEndService],
+
                 'start_time': [startTime],
                 'Date_And_Time': [dateAndTime],
                 'end_time': [endTime],

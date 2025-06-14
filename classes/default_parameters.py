@@ -2,7 +2,11 @@ import numpy as np
 
 class DefaultParameters:
     
-    useIBMBackEndService = True
+    useIBMBackEndService = False
+
+    justCalculateJobTime = False
+    #not working and need inspection
+    usePrecomputedKernel = False
 
     #not used anymore
     useParametersClassParameters = True
@@ -18,7 +22,7 @@ class DefaultParameters:
     # 0 = wine data, 1 = load digits, 2 = credit card. 3 = mnist, 4= custom
     # dataType = 0
     
-    dataType = 1
+    dataType = 3
 
     #0 = amplitude embedding, 1 = angle embedding, 2 = custom embedding
     featureMapType = 0
@@ -120,7 +124,7 @@ class DefaultParameters:
 
     phaseDampingNoise = 0.5
 
-    doOneKfold = False
+    doOneKfold = True
     
     onlyKFoldValue = 0
 
@@ -130,7 +134,7 @@ class DefaultParameters:
 
     usePercentageOfData = True
 
-    PercentageOfData = 0.1
+    PercentageOfData = 0.01
     
     def getModelName(mrNumber, mrValue, fold_index, n_folds):
 

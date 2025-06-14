@@ -26,11 +26,24 @@ class MyModel:
 
         if MyParameters.showProgressDetails:
             # svm = SVC(kernel = getQKernel, verbose= True).fit(input_tr, output_tr)
-            svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+            
+            if MyParameters.usePrecomputedKernel == False:
+
+                svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+            else:
+                svm = SVC(kernel='precomputed')
+                svm.fit(input_tr, output_tr)
+
 
 
         else:
-            svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+
+            if MyParameters.usePrecomputedKernel == False:
+
+                svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+            else:
+                svm = SVC(kernel='precomputed')
+                svm.fit(input_tr, output_tr)
 
         print('training model ended')
 

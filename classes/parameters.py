@@ -14,8 +14,16 @@ from classes.default_parameters import DefaultParameters
 class MyParameters: 
 
     backend = {}
+
+    timeBeforeBackend = 0
+
+    timeAfterBackend = 0
     ####
     useIBMBackEndService = DefaultParameters.useIBMBackEndService
+
+    justCalculateJobTime = DefaultParameters.justCalculateJobTime
+
+    usePrecomputedKernel = DefaultParameters.usePrecomputedKernel
 
     useParametersClassParameters = DefaultParameters.useParametersClassParameters
 
@@ -23,7 +31,7 @@ class MyParameters:
 
     inputNumber = 1
 
-    showProgressDetails = True
+    showProgressDetails = DefaultParameters.showProgressDetails
 
     n_folds = DefaultParameters.n_folds
     
@@ -158,13 +166,24 @@ class MyParameters:
 
         return f'{MyParameters.getSavingModelFolderName()}/{modelName}'
     
+    def isNoiseUsed():
+
+        return True if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyAmplitudeDampingNoise or MyParameters.applyPhaseDampingNoise else False
+
+    
     def getSavingFileName():
 
         # return MyParameters.savingFileName
+
+        finalFileName = 'my_data_frame_all'
+
+        return finalFileName
     
+
         original = 'my_dataframe_'
 
-        noise0 = 'noise' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'no_noise_'
+        # noise0 = 'noise' if MyParameters.applyDepolarizingChannelNoise or MyParameters.applyAfterEnganglementNoise or MyParameters.applyBitFlipNoise or MyParameters.applyPhaseDampingNoise else 'no_noise_'
+        noise0 = 'noise' if MyParameters.isNoiseUsed() else 'no_noise_'
 
         noise1 = f'_1_{MyParameters.depolarizingChannelNoise}_' if MyParameters.applyDepolarizingChannelNoise else ''
 
@@ -210,13 +229,13 @@ class MyParameters:
 
         else:
 
-            print(f'get device, dont use IBM backend')
+            print(f'getDevice() is not use IBM backend')
 
             dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.amplitudeNQubits)
 
             if MyParameters.featureMapType == 1:
 
-             print(f'get device, MyParameters.featureMapType == 1')
+             print(f'in getDevice, MyParameters.featureMapType == 1')
              dev = qml.device(MyParameters.getDeviceType(), wires=MyParameters.angleNQubits)
 
         
@@ -278,7 +297,11 @@ class MyParameters:
         defaultParameters = DefaultParameters()
 
         MyParameters.useIBMBackEndService = DefaultParameters.useIBMBackEndService
+
+        MyParameters.justCalculateJobTime = DefaultParameters.justCalculateJobTime
         
+        MyParameters.usePrecomputedKernel = DefaultParameters.usePrecomputedKernel
+
         MyParameters.useParametersClassParameters = defaultParameters.useParametersClassParameters
 
         MyParameters.roundNumber = defaultParameters.roundNumber + 1

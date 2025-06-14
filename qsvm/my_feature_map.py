@@ -14,6 +14,8 @@ from itertools import combinations
 
 from classes.parameters import MyParameters
 
+from classes.time import MyTimeHelper
+
 class MyFeatureMap:
 
     nqubits = 4
@@ -111,9 +113,16 @@ class MyFeatureMap:
             # print(f'len(A): {len(a)}, and len(B): {len(b)}')
         
         MyParameters.inputNumber = MyParameters.inputNumber + 1           
+    
+        if MyParameters.usePrecomputedKernel == False:
 
-        qml.AmplitudeEmbedding(
-        a, wires=range(MyFeatureMap.amplitudeNQubits), pad_with=0, normalize=True)
+            qml.AmplitudeEmbedding(
+            a, wires=range(MyFeatureMap.amplitudeNQubits), pad_with=0, normalize=True)
+
+        else:
+
+            qml.AmplitudeEmbedding(
+            features=a, wires=range(MyFeatureMap.amplitudeNQubits), normalize=True)
 
         ## or manual noise 1
         if MyParameters.applyDepolarizingChannelNoise == True:
@@ -123,8 +132,14 @@ class MyFeatureMap:
                 qml.DepolarizingChannel(MyParameters.depolarizingChannelNoise, wires=wire) 
 
 
-        qml.adjoint(qml.AmplitudeEmbedding(
-        b, wires=range(MyFeatureMap.nqubits), pad_with=0, normalize=True))
+        if MyParameters.usePrecomputedKernel == False:
+
+            qml.adjoint(qml.AmplitudeEmbedding(
+            b, wires=range(MyFeatureMap.nqubits), pad_with=0, normalize=True))
+        
+        else: 
+            qml.AmplitudeEmbedding(
+            features= b, wires=range(MyFeatureMap.nqubits), normalize=True, inverse=True)
 
         ## or manual noise 2
         if MyParameters.applyPhaseDampingNoise == True:
@@ -185,7 +200,11 @@ class MyFeatureMap:
         if MyParameters.useIBMBackEndService == True:
 
             # print(f'')
-            dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
+            # dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
+            MyParameters.timeBeforeBackend = MyTimeHelper.getTimeNow()
+            dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="brisbane", shots=1024)
+            MyParameters.timeAfterBackend = MyTimeHelper.getTimeNow()
+            
 
 
         return dev

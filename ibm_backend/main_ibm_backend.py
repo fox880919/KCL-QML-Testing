@@ -8,14 +8,16 @@ from sklearn.metrics import accuracy_score
 import qiskit  # Import the qiskit module
 
 # Step 1: Authenticate with IBM Quantum
-ibm_token = "a2a37b0ae3d1e044e4a232ad054b7c52ee5613be17d0a48b0006b15e8e2090d02e3b1453cd07dc437529f352082c166b4eab60be49e5e5e777cab887f5aa8d36"
-  # Replace with your IBM Quantum token
-qiskit.IBMQ.save_account(ibm_token)  # Save your IBM Quantum token
-qiskit.IBMQ.load_account()  # Load your IBM Quantum account
+# ibm_token = "a2a37b0ae3d1e044e4a232ad054b7c52ee5613be17d0a48b0006b15e8e2090d02e3b1453cd07dc437529f352082c166b4eab60be49e5e5e777cab887f5aa8d36"
+#   # Replace with your IBM Quantum token
+# qiskit.IBMQ.save_account(ibm_token)  # Save your IBM Quantum token
+# qiskit.IBMQ.load_account()  # Load your IBM Quantum account
 
 # Step 2: Define the quantum device using the IBM backend
 n_qubits = 4  # Adjust based on your dataset or requirements
-dev = qml.device("qiskit.ibmq", wires=n_qubits, backend="ibmq_qasm_simulator")  # Use the desired backend
+# dev = qml.device("qiskit.ibmq", wires=n_qubits, backend="ibmq_qasm_simulator")  # Use the desired backend
+dev = qml.device("qiskit.remote", wires=n_qubits, backend="brisbane")  # Use the desired backend
+
 
 # Step 3: Define the quantum kernel using the amplitude embedding feature map
 @qml.qnode(dev)

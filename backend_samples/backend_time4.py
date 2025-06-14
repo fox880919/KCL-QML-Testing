@@ -29,7 +29,6 @@ print(f'pm: {pm}')
 isa_circuit = pm.run(qc)
 # print(f'isa_circuit: {isa_circuit}')
 
-
 # Create a Sampler object
 sampler = Sampler(backend)
 # print(f'sampler: {sampler}')

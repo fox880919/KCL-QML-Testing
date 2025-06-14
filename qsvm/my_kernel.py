@@ -1,5 +1,7 @@
 import pennylane as qml
 
+from pennylane import numpy as np
+
 from data.wine_data import WineData as MyData
 
 from sklearn.decomposition import PCA
@@ -68,7 +70,21 @@ class MyKernel:
             print(f'QKernel roundNumber: {MyParameters.roundNumber}')
             # print(f'len(A): {len(A)}, and len(B): {len(B)}')
         # print('2- MyKernel.np: ', self.np)
-        return self.np.array([[self.mySelectedFeatureMap(a, b)[0] for b in B] for a in A])
+
+        if MyParameters.usePrecomputedKernel == False:
+            return self.np.array([[self.mySelectedFeatureMap(a, b)[0] for b in B] for a in A])
+        
+        else: 
+
+            n1 = A.shape[0]
+            n2 = B.shape[0]
+            kernel_matrix = np.zeros((n1, n2))
+            
+            for i in range(n1):
+                for j in range(n2):
+                    kernel_matrix[i, j] = self.mySelectedFeatureMap(A[i], B[j])[0]  # Probability of the first state
+            
+            return kernel_matrix
 
 
     def __getQKernel(A, B):

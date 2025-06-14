@@ -241,7 +241,6 @@ class MyMain():
     
     def useQSVM(np, x_tr, x_test, y_tr, y_test, modelName, fold_index):
 
-
         myQSVM = MyQSVM()
 
         myAccuracyScore = myQSVM.startSVC(np, x_tr, x_test, y_tr, y_test,  modelName, fold_index, MyParameters.featureMapType, MyParameters.pca_components)
@@ -340,6 +339,11 @@ class MyMain():
             # return
             x_tr, x_test, y_tr, y_test = MyMain.dataModification(x_tr, x_test, y_tr, y_test)
 
+
+            if MyParameters.justCalculateJobTime == True:
+
+                print(f'justCalculateJobTime == True')
+                return
 
             # modelName = 'SVM'+ str(0) + str(mrNumber)+ '-' + str(mrValue) + '-' + str(fold_index) + '-of-' + str(MyParameters.n_folds)
 

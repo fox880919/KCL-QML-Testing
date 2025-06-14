@@ -141,4 +141,21 @@ print(f'getDeviceType(): {MyParameters.getDeviceType()}')
 
 print(f'MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
 
+# print(f'MyParameters.isNoiseUsed(): {MyParameters.isNoiseUsed()}')
+
+# mydataFrame = MyDataFrame()
+
+# formattedData = mydataFrame.formatData(0, False, False, False, False)
+
+# print(f'formattedData:{formattedData}')
+
+MyParameters.timeBeforeBackend = MyTimeHelper.getTimeNow()
+
+MyParameters.timeAfterBackend = MyTimeHelper.getTimeNow()
+
+print(f'MyParameters.timeBeforeBackend:{MyParameters.timeBeforeBackend}')
+
+print(f'MyParameters.timeAfterBackend:{MyParameters.timeAfterBackend}')
+
+
 # start()

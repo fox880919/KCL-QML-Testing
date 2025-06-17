@@ -12,6 +12,10 @@ sys.path.insert(4, './metamorphic')
 
 from qiskit_ibm_runtime import QiskitRuntimeService, Options
 
+import time
+
+from datetime import datetime
+
 
 from classes.parameters import MyParameters
 
@@ -139,7 +143,7 @@ print(f'getDevice(): {MyParameters.getDevice()}')
 
 print(f'getDeviceType(): {MyParameters.getDeviceType()}')
 
-print(f'MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
+# print(f'MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
 
 # print(f'MyParameters.isNoiseUsed(): {MyParameters.isNoiseUsed()}')
 
@@ -149,13 +153,27 @@ print(f'MyParameters.bitFlipNoise: {MyParameters.bitFlipNoise}')
 
 # print(f'formattedData:{formattedData}')
 
-MyParameters.timeBeforeBackend = MyTimeHelper.getTimeNow()
+# MyParameters.timeBeforeBackend = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-MyParameters.timeAfterBackend = MyTimeHelper.getTimeNow()
+# time.sleep(2) 
+
+# MyParameters.timeAfterBackend = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+MyParameters.timeBeforeBackend = datetime.now()
+
+time.sleep(2) 
+
+MyParameters.timeAfterBackend = datetime.now()
+
 
 print(f'MyParameters.timeBeforeBackend:{MyParameters.timeBeforeBackend}')
+
 
 print(f'MyParameters.timeAfterBackend:{MyParameters.timeAfterBackend}')
 
 
-# start()
+timeDifferenceInSeconds = MyTimeHelper.getTimeDifferenceInSeconds(MyParameters.timeAfterBackend, MyParameters.timeBeforeBackend)
+print(f'timeDifferenceInSeconds:{timeDifferenceInSeconds}')
+
+start()

@@ -2,7 +2,9 @@ import numpy as np
 
 class DefaultParameters:
     
-    useIBMBackEndService = False
+
+
+    useIBMBackEndService = True
 
     justCalculateJobTime = False
     #not working and need inspection
@@ -99,7 +101,7 @@ class DefaultParameters:
     useQiskit = False
 
     #noise 1
-    applyDepolarizingChannelNoise = True
+    applyDepolarizingChannelNoise = False
 
     depolarizingChannelNoise = 0.5
 

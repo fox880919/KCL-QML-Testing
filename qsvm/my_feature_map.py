@@ -201,9 +201,9 @@ class MyFeatureMap:
 
             # print(f'')
             # dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="ibmq_qasm_simulator", shots=1024)
-            MyParameters.timeBeforeBackend = MyTimeHelper.getTimeNow()
+            # MyParameters.timeBeforeBackend = MyTimeHelper.getTimeNow()
             dev = qml.device(MyParameters.getDevice(), wires=MyFeatureMap.amplitudeNQubits, backend="brisbane", shots=1024)
-            MyParameters.timeAfterBackend = MyTimeHelper.getTimeNow()
+            # MyParameters.timeAfterBackend = MyTimeHelper.getTimeNow()
             
 
 

@@ -40,4 +40,6 @@ mandatory †ø install
 
 
 
+// ibm cloud cli
 
+curl -fsSL https://clis.cloud.ibm.com/install/osx | sh

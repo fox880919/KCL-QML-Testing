@@ -10,6 +10,8 @@
 
 from my_feature_map import MyFeatureMap
 
+# from my_qiskit_feature_map import MyFeatureMap
+
 # from my_feature_map_qiskit import MyQiskitFeatureMap
 
 from my_kernel import MyKernel

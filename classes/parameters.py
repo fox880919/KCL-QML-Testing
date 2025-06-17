@@ -15,9 +15,13 @@ class MyParameters:
 
     backend = {}
 
+    time_format = "%Y-%m-%d %H:%M:%S"
+
     timeBeforeBackend = 0
 
     timeAfterBackend = 0
+
+
     ####
     useIBMBackEndService = DefaultParameters.useIBMBackEndService
 
@@ -249,6 +253,8 @@ class MyParameters:
         print(f'in MyParamaeters.getDevice with dev = {dev}')
 
         return dev
+    
+
     
     def getDeviceType():
 

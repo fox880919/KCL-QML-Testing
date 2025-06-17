@@ -8,6 +8,9 @@ from classes.my_dill import MyDill
 
 from classes.parameters import MyParameters
 
+from classes.time import MyTimeHelper
+
+
 class MyModel:
 
     myJoblib = MyJoblib()
@@ -29,7 +32,12 @@ class MyModel:
             
             if MyParameters.usePrecomputedKernel == False:
 
+                # MyParameters.timeBeforeBackend =  MyTimeHelper.getTimeNow()
+                
                 svm = SVC(kernel = getQKernel).fit(input_tr, output_tr)
+
+                # MyParameters.timeAfterBackend =  MyTimeHelper.getTimeNow()
+
             else:
                 svm = SVC(kernel='precomputed')
                 svm.fit(input_tr, output_tr)

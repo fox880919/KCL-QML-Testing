@@ -24,7 +24,13 @@ from data.data_manager import DataManager
 
 from qsvm.my_kernel import MyKernel
 
-from qsvm.my_qsvm import MyQSVM
+if not MyParameters.userOnlyQiskitCode:
+
+    from qsvm.my_qsvm import MyQSVM
+
+else:
+
+    from qsvm.my_qsvm_qiskit import MyQSVM
 
 from data.my_dataframe import MyDataFrame
 

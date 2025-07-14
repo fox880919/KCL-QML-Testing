@@ -8,11 +8,13 @@
 
 # from sklearn.metrics import accuracy_score 
 
-from my_feature_map import MyFeatureMap
+from my_feature_map import MyFeatureMap #pennylane
 
-# from my_qiskit_feature_map import MyFeatureMap
+# from my_qiskit_feature_map import MyFeatureMap 
 
-# from my_feature_map_qiskit import MyQiskitFeatureMap
+# from my_feature_map_qiskit import MyQiskitFeatureMap #qiskit_machine_learning
+
+#we run ibm backend
 
 from my_kernel import MyKernel
 

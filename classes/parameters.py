@@ -2,7 +2,7 @@ import numpy as np
 
 import pennylane as qml
 
-import pennylane_qiskit
+# import pennylane_qiskit
 
 from qiskit_ibm_runtime import QiskitRuntimeService
 
@@ -23,6 +23,10 @@ class MyParameters:
 
 
     ####
+
+    userOnlyQiskitCode = DefaultParameters.userOnlyQiskitCode
+
+
     useIBMBackEndService = DefaultParameters.useIBMBackEndService
 
     justCalculateJobTime = DefaultParameters.justCalculateJobTime
@@ -208,7 +212,8 @@ class MyParameters:
     def initiateBackend():
     
         print('calling backend')
-        service = QiskitRuntimeService()
+        # service = QiskitRuntimeService()
+        service = QiskitRuntimeService(instance='faiez_first_free_instance')
 
         backend = service.backend(
             "ibm_brisbane"
@@ -260,10 +265,18 @@ class MyParameters:
 
         deviceType = 'lightning.qubit'
 
+        #no noise simulator
+        device = 'lightning.qubit'
+        
+        #with noisy simulator
+        device = 'default.mixed'
+
+        #IBM backend device
+        device = 'qiskit.remote'
+
+
         if MyParameters.useIBMBackEndService == True:
 
-            # deviceType = "qiskit.ibmq"
-            # deviceType = "qiskit.ibm"
             deviceType = "qiskit.remote"
 
         else:    
@@ -301,6 +314,9 @@ class MyParameters:
 
         
         defaultParameters = DefaultParameters()
+
+        MyParameters.userOnlyQiskitCode = DefaultParameters.userOnlyQiskitCode
+
 
         MyParameters.useIBMBackEndService = DefaultParameters.useIBMBackEndService
 

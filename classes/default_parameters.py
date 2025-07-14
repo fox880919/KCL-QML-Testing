@@ -3,8 +3,9 @@ import numpy as np
 class DefaultParameters:
     
 
+    userOnlyQiskitCode = True
 
-    useIBMBackEndService = True
+    useIBMBackEndService = False
 
     justCalculateJobTime = False
     #not working and need inspection

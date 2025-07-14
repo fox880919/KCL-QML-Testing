@@ -36,6 +36,9 @@ mandatory †ø install
 // pip3 install pennylane scikit-learn qiskit_machine_learning qiskit_aer qiskit-ibm-provider qiskit-ibm-provider qiskit-ibm-runtime joblib pickle dill plotly pennylane-qiskit
 
 
+// pip3 install python-dotenv
+
+
 
 
 

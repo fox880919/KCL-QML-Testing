@@ -63,7 +63,7 @@ class MyFeatureMap:
 
         
 
-    def __getAmplitudeEmdedding(a, b, amplitude_qubits, total_qubits):
+    def __getAmplitudeEmdedding(a, b, amplitude_qubits = 3, total_qubits = 3):
         # Ensure a and b are normalized
         norm_a = sum(abs(x)**2 for x in a)**0.5
         norm_b = sum(abs(x)**2 for x in b)**0.5

@@ -1,6 +1,6 @@
 import pennylane as qml
 
-import pennylane_qiskit
+# import pennylane_qiskit
 
 from data.wine_data import WineData as MyData
 

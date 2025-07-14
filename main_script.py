@@ -6,7 +6,7 @@ sys.path.insert(0, './data')
 sys.path.insert(1, './metamorphic')
 sys.path.insert(2, './classes')
 sys.path.insert(3, './qsvm')
-sys.path.insert(4, './metamorphic')
+# sys.path.insert(4, './metamorphic')
 
 # from hypothesis import given, strategies as st
 

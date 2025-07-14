@@ -5,7 +5,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
-import qiskit  # Import the qiskit module
+# import qiskit  # Import the qiskit module
+
+from qiskit import QuantumCircuit
+from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
+from qiskit.transpiler import generate_preset_pass_manager
+
+
+service = QiskitRuntimeService()
+
+backend = service.backend("ibm_brisbane")
 
 # Step 1: Authenticate with IBM Quantum
 # ibm_token = "a2a37b0ae3d1e044e4a232ad054b7c52ee5613be17d0a48b0006b15e8e2090d02e3b1453cd07dc437529f352082c166b4eab60be49e5e5e777cab887f5aa8d36"
@@ -16,18 +25,21 @@ import qiskit  # Import the qiskit module
 # Step 2: Define the quantum device using the IBM backend
 n_qubits = 4  # Adjust based on your dataset or requirements
 # dev = qml.device("qiskit.ibmq", wires=n_qubits, backend="ibmq_qasm_simulator")  # Use the desired backend
-dev = qml.device("qiskit.remote", wires=n_qubits, backend="brisbane")  # Use the desired backend
+# dev = qml.device("qiskit.remote", wires=n_qubits, backend="brisbane")  # Use the desired backend
+dev = qml.device("qiskit.remote", wires=n_qubits, backend=backend)  # Use the desired backend
 
 
 # Step 3: Define the quantum kernel using the amplitude embedding feature map
 @qml.qnode(dev)
 def quantum_kernel(x1, x2):
     # Amplitude embedding for the first data point
-    qml.AmplitudeEmbedding(features=x1, wires=range(n_qubits), normalize=True)
+    qml.AmplitudeEmbedding(features=x1, wires=range(n_qubits), normalize=True, pad_with=0)
     
     # Amplitude embedding for the second data point (inverse)
-    qml.AmplitudeEmbedding(features=x2, wires=range(n_qubits), normalize=True, inverse=True)
+    # qml.AmplitudeEmbedding(features=x2, wires=range(n_qubits), normalize=True, inverse=True, pad_with=0)
+    qml.adjoint(qml.AmplitudeEmbedding(features=x2, wires=range(n_qubits), pad_with=0, normalize=True))  
     
+      
     # Measure the overlap between the two states
     return qml.probs(wires=range(n_qubits))
 

@@ -3,7 +3,7 @@ import numpy as np
 class DefaultParameters:
     
 
-    userOnlyQiskitCode = True
+    userOnlyQiskitCode = False
 
     useIBMBackEndService = False
 
